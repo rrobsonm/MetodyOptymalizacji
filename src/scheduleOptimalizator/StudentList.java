@@ -2,10 +2,13 @@ package scheduleOptimalizator;
 
 public class StudentList extends Sollution {
 
+	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
+	
+	
+	
 	@Override
 	protected void generate() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
