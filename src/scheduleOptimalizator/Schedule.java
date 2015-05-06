@@ -2,7 +2,7 @@ package scheduleOptimalizator;
 
 import java.util.List;
 
-public class Schedule extends Sollution {
+public class Schedule extends Solution {
 
 	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
 	List<Student> students;
@@ -16,13 +16,13 @@ public class Schedule extends Sollution {
 	}
 
 	@Override
-	public Sollution cross(Sollution sollution) {
+	public Solution cross(Solution sollution) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Sollution mutate() {
+	public Solution mutate() {
 		// TODO Auto-generated method stub
 		return null;
 	}

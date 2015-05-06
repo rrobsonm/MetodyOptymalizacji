@@ -6,7 +6,7 @@ public class Population {
 
 	int size;
 	int elite;
-	List<Sollution> sollutions;
+	List<Solution> sollutions;
 	
 	public void evolve(){
 		
