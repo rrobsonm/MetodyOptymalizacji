@@ -1,8 +1,12 @@
 package scheduleOptimalizator;
 
-public class StudentList extends Sollution {
+import java.util.List;
+
+public class Schedule extends Sollution {
 
 	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
+	List<Student> students;
+	List<Class> classes;
 	
 	
 	
