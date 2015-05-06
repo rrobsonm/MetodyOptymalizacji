@@ -20,4 +20,8 @@ public class TimeProvider {
 		
 		return timeSlotNumber;
 	}
+	
+	public static int timeSlotNumberToHour(int timeSlotNumber){		
+		return (timeSlotNumber%(24*60/slotLength))*slotLength/60;
+	}
 }
