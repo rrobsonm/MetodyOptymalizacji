@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class TimeProvider {
 	
-	private static final int slotLength=5;
+	private static final int slotLength=1;
 
 	public static int timeToTimeSlotNumber(DayOfWeek day, LocalTime time){
 		int timeSlotNumber=0;
