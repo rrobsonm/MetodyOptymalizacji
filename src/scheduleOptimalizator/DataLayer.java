@@ -2,11 +2,11 @@ package scheduleOptimalizator;
 
 public class DataLayer {
 	
-	public Foo getStudentsList(){
+	public void getStudentsList(){
 		
 	}
 	
-	public Foo getClassList(){
+	public void getClassList(){
 		
 	}
 }
