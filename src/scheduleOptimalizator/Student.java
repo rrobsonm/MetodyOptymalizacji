@@ -19,7 +19,6 @@ public class Student {
 		
 		quicksort(0, slots.length-1, slots);
 		
-		
 		//Policzenie kolizji zajêæ POCZATEK
 		int collisionCounter = 0;
 		
@@ -32,6 +31,19 @@ public class Student {
 				}
 			}
 		}//Policzenie kolizji zajêæ KONIEC
+		
+		//Policzenie nieobecnoœci zajêæ POCZATEK
+				int apsentCounter = 0;
+				
+				for(int i =0; i < slots.length-1; ++i ){
+					int difference = slots[i+1][0] - slots[i][1];
+					if( difference <= 0){
+						++collisionCounter;
+						for(int j=i+2; (slots[j][0] - slots[i][1] <= 0) && (j < slots.length); ++j){
+							++collisionCounter;
+						}
+					}
+				}//Policzenie kolizji zajêæ KONIEC
 		
 		
 		//Policzenie czasu na zajeciach POCZATEK (mo¿e byæ problem z jednymi zajêciami, nie myœla³em o skrajnych przypoadkach dobrze)
