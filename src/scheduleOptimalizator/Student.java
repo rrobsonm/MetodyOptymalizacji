@@ -8,8 +8,9 @@ public class Student {
 	private int id;
 	private int[] requiredClasses;
 	private int[] travelTime;         //24 ints. Each corresponds to travel time in minutes. travelTime[1] gets travel time from 1:00 to 1:59
-	private int objective;
-	private int penalty;
+	public int clashes;
+	public int busyTime;
+	public int absent;
 	
 	public int getTravelTime(int timeSlotNumber){
 		return travelTime[TimeProvider.timeSlotNumberToHour(timeSlotNumber)];
@@ -20,33 +21,35 @@ public class Student {
 		quicksort(0, slots.length-1, slots);
 		
 		//Policzenie kolizji zajêæ POCZATEK
-		int collisionCounter = 0;
+		int cashesCounter = 0;
 		
 		for(int i =0; i < slots.length-1; ++i ){
 			int difference = slots[i+1][0] - slots[i][1];
 			if( difference <= 0){
-				++collisionCounter;
+				++cashesCounter;
 				for(int j=i+2; (slots[j][0] - slots[i][1] <= 0) && (j < slots.length); ++j){
-					++collisionCounter;
+					++cashesCounter;
 				}
 			}
 		}//Policzenie kolizji zajêæ KONIEC
+		clashes = cashesCounter;
 		
 		//Policzenie nieobecnoœci zajêæ POCZATEK
-				int apsentCounter = 0;
+		int absentCounter = 0;
 				
-				for(int i =0; i < slots.length-1; ++i ){
-					int difference = slots[i+1][0] - slots[i][1];
-					if( difference <= 0){
-						++collisionCounter;
-						for(int j=i+2; (slots[j][0] - slots[i][1] <= 0) && (j < slots.length); ++j){
-							++collisionCounter;
-						}
-					}
-				}//Policzenie kolizji zajêæ KONIEC
+		outerloop:
+		for(int i =0; i < requiredClasses.length-1; ++i ){
+			for (int j = 0; j < classes.length; j++) {
+				if(requiredClasses[i] == classes[j]){
+				continue outerloop;
+				}
+			}
+			absentCounter++;
+		}//Policzenie nieobecnoœci zajêæ KONIEC
+		absent = absentCounter;
 		
 		
-		//Policzenie czasu na zajeciach POCZATEK (mo¿e byæ problem z jednymi zajêciami, nie myœla³em o skrajnych przypoadkach dobrze)
+		//Policzenie czasu na zajeciach POCZATEK (mo¿e byæ problem z jednymi zajêciami, nie myœla³em o skrajnych przypoadkach dobrze narazie)
 		//pierwsze zajecia liczymy recznie bo maja jeden dojazd
 		int busyCounter = getTravelTime(slots[0][0]);
 		int timeStamp = slots[0][1];
@@ -86,6 +89,8 @@ public class Student {
 				busyCounter = busyCounter + slots[slots.length-1][1]-slots[slots.length-2][1] + getTravelTime(slots[slots.length-1][1]);
 			} //zachodza ca³kowicie brak akcji dodania czasu
 		}//Policzenie czasu na zajeciach KONIEC
+		busyTime = busyCounter;
+		
 		
 	}
 		

@@ -28,9 +28,21 @@ public class Schedule extends Solution {
 	}
 
 	@Override
-	public int valuate() {
+	public int getRating() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int[] getStats() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateValues() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
