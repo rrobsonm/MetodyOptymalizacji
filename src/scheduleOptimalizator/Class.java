@@ -27,5 +27,5 @@ public class Class {
 		this.startSlot = startSlot;
 		this.numberOfSlots = numberOfSlots;
 		this.maxNumberofStudents = maxNumberofStudents;
-	}	
+	}
 }

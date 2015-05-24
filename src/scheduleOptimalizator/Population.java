@@ -18,8 +18,8 @@ public class Population {
 	
 	Population(int elite, List<Solution> list){
 		
-		if(list.size() < elite ){
-			throw new IllegalArgumentException("wielkoœæ elity nie mo¿e byæ mniejsza od wielkoœci populacji");
+		if( elite>100 ){
+			throw new IllegalArgumentException("Elite must be smaller than 100");
 		}
 		solutions = new ArrayList<Solution>(list.size()*2);
 		Collections.copy(solutions,list);
@@ -27,13 +27,10 @@ public class Population {
 		size = solutions.size();
 	}
 	
-	public void evolve() throws InterruptedException{
-		
+	public void evolve() throws InterruptedException{	
 		crossingPhase();
 		mutatePhase();
-		replacmentPhase();
-		
-		
+		replacmentPhase();		
 	}
 	
 	private void replacmentPhase() {
@@ -45,10 +42,10 @@ public class Population {
 		
 	}
 
-	private void crossingPhase() throws InterruptedException{//losujemy (size-elite)*crossLevel/100 par i tworzymy tyle dzieci. Ka¿de dziecko dodawane jest na koniec solutions
+	private void crossingPhase() throws InterruptedException{//losujemy (size-elite*size)*crossLevel/100 par i tworzymy tyle dzieci. Ka¿de dziecko dodawane jest na koniec solutions
 		
 		CrossingPhase[] cp = new CrossingPhase[NUMBER_OF_THREADS];
-		int pairs = (size-elite)*crossLevel/100/NUMBER_OF_THREADS;
+		int pairs = (size-elite*size)*crossLevel/100/NUMBER_OF_THREADS;
 		
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS - 1; ++i){
@@ -97,12 +94,12 @@ public class Population {
 		
 	}
 	
-	private void mutatePhase() throws InterruptedException{//losujemy (size-elite)*crossLevel/100 par i tworzymy tyle dzieci. Ka¿de dziecko dodawane jest na koniec solutions
+	private void mutatePhase() throws InterruptedException{//losujemy (solutions.size()-elite*size)*crossLevel/100 osobników i mutujemy ich, z wy³¹czeniem elity
 		
-		int numberOfMutations = (solutions.size()-elite)*mutationLevel/100;
+		int numberOfMutations = (solutions.size()-size*elite)*mutationLevel/100;
 	
 		for (int i = 0; i < numberOfMutations; ++i){
-			int index = elite + generator.nextInt(solutions.size()-elite);
+			int index = size*elite + generator.nextInt(solutions.size()-size*elite);
 			solutions.get(index).mutate();
 			solutions.get(index).updateValues();
 		}		
