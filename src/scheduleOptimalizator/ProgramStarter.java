@@ -1,6 +1,8 @@
 package scheduleOptimalizator;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -28,7 +30,18 @@ public class ProgramStarter implements Runnable {
 		try {
 			
 			DataLayer dataLayer = new DataLayer(classesPath,studentsPath);
-			Schedule sol = Schedule.generate();
+
+			List<Solution> solutions = new ArrayList<Solution>();
+			for(int i = 0; i < size; i++){
+				solutions.add(Schedule.generate(dataLayer.getClassList(), dataLayer.getStudentsList()));
+			}
+			Population population = new Population(elite, solutions);
+			
+			for(int i = 0; i < maxIterations ; ++i){
+				population.evolve();
+				
+			}
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

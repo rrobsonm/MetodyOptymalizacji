@@ -11,8 +11,7 @@ public class Schedule extends Solution {
 	
 	
 
-	public static Schedule generate() {
-
+	public static Schedule generate(List<Student> students, List<Class> classes) {
 		return new Schedule();
 	}
 

@@ -2,6 +2,7 @@ package scheduleOptimalizator;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +16,9 @@ public class Population {
 	private int crossLevel; //w procentach
 	private List<Solution> solutions;
 	private Random generator = new Random();
-	
+	private LinkedList<int[]> logsBeast = new LinkedList<int[]>();
+	private LinkedList<int[]> logsWorst = new LinkedList<int[]>();
+	private LinkedList<int[]> logsMiddle = new LinkedList<int[]>();
 	
 	Population(int elite, List<Solution> list){
 		
@@ -31,9 +34,17 @@ public class Population {
 	public void evolve() throws InterruptedException{	
 		crossingPhase();
 		mutatePhase();
-		replacmentPhase();		
+		replacmentPhase();
+		log();
 	}
 	
+	private void log() {
+		// TODO Auto-generated method stub
+		logsBeast.add(solutions.get(0).getStats());
+		logsWorst.add(solutions.get(size-1).getStats());
+		logsMiddle.add(solutions.get(size/2).getStats());
+	}
+
 	private void replacmentPhase() {
 		// TODO Auto-generated method stub
 		Collections.sort(solutions);
