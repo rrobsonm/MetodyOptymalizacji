@@ -158,7 +158,8 @@ public class GUI extends JFrame {
 		      }
 		    });
 		
-		
+		textFieldClassesPath.setText("C:\\Users\\Adam Lach\\LunaWorkspace\\scheduleOptimalizator\\res\\classes.csv");
+		textFieldStudentsPath.setText("C:\\Users\\Adam Lach\\LunaWorkspace\\scheduleOptimalizator\\res\\students.csv");
 		
 	}
 

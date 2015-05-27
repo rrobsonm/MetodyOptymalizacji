@@ -11,9 +11,17 @@ public class Student {
 	public int clashes;
 	public int busyTime;
 	public int absent;
+	private final static int TRAVEL_TIME_TABLE_LENGTH = 24; // (24 % TRAVEL_TIME_TABLE_LENGTH) MUST BE 0
 	
+	Student(int id, int[] travelTime, int[] requiredClasses){
+		if(travelTime.length != TRAVEL_TIME_TABLE_LENGTH) throw new IllegalArgumentException("student id:"+id+" should contain "+TRAVEL_TIME_TABLE_LENGTH+" integers representing travel times");
+		this.id = id;
+		this.requiredClasses = requiredClasses;
+		this.travelTime = travelTime;
+	}
 	public int getTravelTime(int timeSlotNumber){
-		return travelTime[TimeProvider.timeSlotNumberToHour(timeSlotNumber)];
+		int tmp = 24/TRAVEL_TIME_TABLE_LENGTH;
+		return travelTime[TimeProvider.timeSlotNumberToHour(timeSlotNumber)/tmp];
 	}
 	
 	public void updateValues(int[][] slots, int[] classes){//slots = {{poczatek1,koniec1}{poczatek2,koniec2}....}, classes = numery typow zajec na ktore jestem wpisany
