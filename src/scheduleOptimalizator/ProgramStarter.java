@@ -27,7 +27,7 @@ public class ProgramStarter implements Runnable {
 		try {
 			
 			DataLayer dataLayer = new DataLayer(classesPath,studentsPath);
-			
+			Schedule sol = Schedule.generate();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
