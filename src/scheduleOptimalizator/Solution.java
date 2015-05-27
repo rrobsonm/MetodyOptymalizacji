@@ -2,7 +2,6 @@ package scheduleOptimalizator;
 
 public abstract class Solution implements Comparable<Solution> {
 
-	abstract protected void generate();
 	abstract public Solution cross(Solution sollution);
 	abstract public Solution  mutate();
 	abstract public int getRating();//ma tylko zwracac wartoœæ, nie liczyæ za duzo

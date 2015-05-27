@@ -16,6 +16,7 @@ public class Population {
 	private List<Solution> solutions;
 	private Random generator = new Random();
 	
+	
 	Population(int elite, List<Solution> list){
 		
 		if( elite>100 ){

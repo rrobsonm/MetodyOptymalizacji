@@ -10,9 +10,10 @@ public class Schedule extends Solution {
 	
 	
 	
-	@Override
-	protected void generate() {
-		// TODO Auto-generated method stub
+
+	public static Schedule generate() {
+
+		return new Schedule();
 	}
 
 	@Override
