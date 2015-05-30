@@ -35,11 +35,11 @@ public class ProgramStarter implements Runnable {
 			for(int i = 0; i < size; i++){
 				solutions.add(Schedule.generate(dataLayer.getClassList(), dataLayer.getStudentsList()));
 			}
+			
 			Population population = new Population(elite, solutions);
 			
 			for(int i = 0; i < maxIterations ; ++i){
 				population.evolve();
-				
 			}
 			
 			

@@ -19,6 +19,7 @@ public class Student {
 		this.requiredClasses = requiredClasses;
 		this.travelTime = travelTime;
 	}
+	
 	public int getTravelTime(int timeSlotNumber){
 		int tmp = 24/TRAVEL_TIME_TABLE_LENGTH;
 		return travelTime[TimeProvider.timeSlotNumberToHour(timeSlotNumber)/tmp];

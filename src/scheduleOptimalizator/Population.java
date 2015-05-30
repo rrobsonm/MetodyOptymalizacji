@@ -16,10 +16,8 @@ public class Population {
 	private int crossLevel; //w procentach
 	private List<Solution> solutions;
 	private Random generator = new Random();
-	private LinkedList<int[]> logsBeast = new LinkedList<int[]>();
-	private LinkedList<int[]> logsWorst = new LinkedList<int[]>();
-	private LinkedList<int[]> logsMiddle = new LinkedList<int[]>();
-	
+	private ArrayList<LinkedList<int[]>> logs = new ArrayList<LinkedList<int[]>>();
+
 	Population(int elite, List<Solution> list){
 		
 		if( elite>100 ){
@@ -29,6 +27,11 @@ public class Population {
 		Collections.copy(solutions,list);
 		Collections.sort(solutions);
 		size = solutions.size();
+		
+		for(int i = 0; i < size; i++ ){
+			logs.add(new LinkedList<int []>());
+		}
+		
 	}
 	
 	public void evolve() throws InterruptedException{	
@@ -40,9 +43,11 @@ public class Population {
 	
 	private void log() {
 		// TODO Auto-generated method stub
-		logsBeast.add(solutions.get(0).getStats());
-		logsWorst.add(solutions.get(size-1).getStats());
-		logsMiddle.add(solutions.get(size/2).getStats());
+		for(int i = 0 ; i < size; ++i){
+			logs.get(i).add(solutions.get(i).getStats());
+		}
+		
+
 	}
 
 	private void replacmentPhase() {
