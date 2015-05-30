@@ -1,10 +1,16 @@
 package scheduleOptimalizator;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
+
+import com.opencsv.CSVWriter;
 
 public class Population {
 
@@ -120,5 +126,22 @@ public class Population {
 			solutions.get(index).mutate();
 			solutions.get(index).updateValues();
 		}		
+	}
+
+	public void saveResults(String directory) throws IOException {
+		
+				
+		for(int i = 0; i < logs.size(); i++){
+			CSVWriter writer = new CSVWriter(new FileWriter(directory+"/"+i+".csv"));
+			ListIterator iterator = logs.get(i).listIterator();
+			while(iterator.hasNext()){
+				int[] nums = (int[]) iterator.next();
+				String[] a=Arrays.toString(nums).split("[\\[\\]]")[1].split(", "); 
+				writer.writeNext(a);
+			}
+		}
+		
+		// TODO Auto-generated method stub
+		
 	}
 }

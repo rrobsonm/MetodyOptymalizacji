@@ -27,6 +27,7 @@ public class GUI extends JFrame {
 	private JTextField textFieldCrossLevel;
 	private JTextField textFieldMaxIterations;
 	private JTextField textFieldStudentsPath;
+	private JTextField textFieldOutputPath;
 	private JTextField textFieldClassesPath;
 	
 	GUI(){
@@ -121,6 +122,28 @@ public class GUI extends JFrame {
 		      }
 		    });
 		
+		Box horizontalBoxOutputPath = Box.createHorizontalBox();
+		verticalBoxPaths.add(horizontalBoxOutputPath);
+		
+		JLabel lblOutputPath = new JLabel("Output file path");
+		horizontalBoxOutputPath.add(lblOutputPath);
+		
+		textFieldOutputPath = new JTextField();
+		horizontalBoxOutputPath.add(textFieldOutputPath);
+		textFieldOutputPath.setColumns(30);
+		
+		JButton btnBrowseOutputPath = new JButton("browse");
+		horizontalBoxOutputPath.add(btnBrowseOutputPath);
+		btnBrowseOutputPath.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent ae) {
+		        JFileChooser fileChooser = new JFileChooser();
+		        int returnValue = fileChooser.showOpenDialog(null);
+		        if (returnValue == JFileChooser.APPROVE_OPTION) {
+		          textFieldOutputPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
+		        }
+		      }
+		    });
+		
 		Box horizontalBoxClassesPath = Box.createHorizontalBox();
 		verticalBoxPaths.add(horizontalBoxClassesPath);
 		
@@ -153,7 +176,7 @@ public class GUI extends JFrame {
 		horizontalBoxStart.add(btnStart);
 		btnStart.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent ae) {
-		        ProgramStarter programStarter = new ProgramStarter(textFieldClassesPath.getText(), textFieldStudentsPath.getText(), 0, 0, 0, 0, 0);
+		        ProgramStarter programStarter = new ProgramStarter(textFieldClassesPath.getText(), textFieldStudentsPath.getText(),textFieldOutputPath.getText(), 0, 0, 0, 0, 0);
 		        programStarter.run();
 		      }
 		    });

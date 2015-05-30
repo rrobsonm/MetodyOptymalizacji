@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
 
 public class ProgramStarter implements Runnable {
 
-	String classesPath, studentsPath;
+	String classesPath, studentsPath, outputPath;
 	int size, elite, mutationLevel, crossLevel, maxIterations;
 	
 	
 	
 	
-	public ProgramStarter(String classesPath, String studentsPath, int size,
+	public ProgramStarter(String classesPath, String studentsPath, String outputPath, int size,
 			int elite, int mutationLevel, int crossLevel, int maxIterations) {
 		super();
 		this.classesPath = classesPath;
@@ -41,6 +41,7 @@ public class ProgramStarter implements Runnable {
 			for(int i = 0; i < maxIterations ; ++i){
 				population.evolve();
 			}
+				population.saveResults(outputPath);
 			
 			
 		} catch (Exception e) {
