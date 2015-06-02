@@ -6,7 +6,7 @@ import java.util.List;
 public class Student {
 	
 	private int id;
-	private int[] requiredClasses;
+	public int[] requiredClasses;
 	private int[] travelTime;         //24 ints. Each corresponds to travel time in minutes. travelTime[1] gets travel time from 1:00 to 1:59
 	public int clashes;
 	public int busyTime;
@@ -19,7 +19,9 @@ public class Student {
 		this.requiredClasses = requiredClasses;
 		this.travelTime = travelTime;
 	}
-	
+	public int getId() {
+		return id;
+	}
 	public int getTravelTime(int timeSlotNumber){
 		int tmp = 24/TRAVEL_TIME_TABLE_LENGTH;
 		return travelTime[TimeProvider.timeSlotNumberToHour(timeSlotNumber)/tmp];

@@ -1,24 +1,61 @@
 package scheduleOptimalizator;
 
 import java.util.List;
+import java.util.Random;
 
 public class Schedule extends Solution {
 
 	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
-	List<Student> students;
-	List<Class> classes;
-	
+	//List<Student> students;
+	//List<Class> classes;
+	private static double minpercentofclasses; // %- of required classes ( from 0 to 1)
+	private static double classesfilledfactor; // classes fill factor (from 0 to 1) 1 - all required classes 0 -min nb of classes (linear)
 	
 	
 
 	public static Schedule generate(List<Student> students, List<Class> classes) {
-		return new Schedule();
+		Schedule schedule = new Schedule();
+		
+		for (Student student : students) {
+			Random generator = new Random();
+			int nbofrequiredclasses = student.requiredClasses.length;
+			int nbofminclasses = (int)Math.ceil(nbofrequiredclasses*minpercentofclasses);
+			int randomnbofclasses=(int) (nbofminclasses*(1-classesfilledfactor)+generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)));
+			int nbofclasses = randomnbofclasses > nbofrequiredclasses ? nbofrequiredclasses :randomnbofclasses;
+			for (int C=0; C<nbofclasses;C++) {
+				
+				int whattype = student.requiredClasses[C];
+				List<Class> tmpclass = classes;
+				tmpclass.removeIf(p -> p.getType()!=whattype);
+
+				StudentClassProjection classprojection = new StudentClassProjection(student, tmpclass.get(generator.nextInt(tmpclass.size())));
+				schedule.studentclassprojection.add(classprojection);
+			}
+		}
+		return schedule;
 	}
 
 	@Override
 	public Solution cross(Solution sollution) {
-		// TODO Auto-generated method stub
-		return null;
+		Random generator = new Random();
+		Solution newsollution = new scheduleOptimalizator.Schedule();
+		int minnbofprojection = studentclassprojection.size() > sollution.studentclassprojection.size() ? 2 : 1;
+		List<StudentClassProjection> currentprojection;
+		if(minnbofprojection==1) {
+			currentprojection=this.studentclassprojection;
+		} else {
+			currentprojection=sollution.studentclassprojection;
+		}
+		int changestudentfromplace = generator.nextInt(currentprojection.size());
+		int countprojection=0;
+		for(StudentClassProjection projection : currentprojection) {
+			if(changestudentfromplace>countprojection) {
+				
+			} 
+			countprojection++;
+		}
+		newsollution.studentclassprojection=currentprojection;
+		return newsollution;
 	}
 
 	@Override
