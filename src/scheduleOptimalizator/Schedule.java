@@ -15,9 +15,10 @@ public class Schedule extends Solution {
 	private int rating;
 	
 
-	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes) {
+	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
 		Schedule schedule = new Schedule();
-		
+		classesfilledfactor = minpercentofclassesp/100;
+		minpercentofclassesp = minpercentofclassesp/100;
 		for (Student student : students) {
 			Random generator = new Random();
 			int nbofrequiredclasses = student.requiredClasses.length;
