@@ -1,6 +1,6 @@
 package scheduleOptimalizator;
 
-import java.util.List;
+import java.util.*;
 
 public abstract class Solution implements Comparable<Solution> {
 	static public class StudentClassProjection {
@@ -15,6 +15,17 @@ public abstract class Solution implements Comparable<Solution> {
 		public StudentClassProjection() {
 			
 		}
+		public boolean equals(Object obj) {
+	        if (obj == this) {
+	            return true;
+	        }
+	        if (!(obj instanceof StudentClassProjection)) {
+	            return false;
+	        }
+	        StudentClassProjection other = (StudentClassProjection) obj;
+	        return this.students.equals(other.students);
+	    }
+		
 	}
 	abstract public Solution cross(Solution sollution);
 	abstract public Solution  mutate();
@@ -26,10 +37,23 @@ public abstract class Solution implements Comparable<Solution> {
 		// TODO Auto-generated method stub
 		 return arg0.getRating() - this.getRating();
 	}
-
+	
+	public ArrayList<Student> getStudents() {
+		// Remove Duplicates: place them in new list (see above example).
+		ArrayList<Student> result = new ArrayList<>();
+		HashSet<Student> set = new HashSet<>();
+		for (StudentClassProjection item : this.studentclassprojection ) {
+		    if (!set.contains(item.students)) {
+			result.add(item.students);
+			set.add(item.students);
+		    }
+		}
+		return result;
+	    }
 	public List<StudentClassProjection> studentclassprojection;
 	public boolean instudentcopy; // kopiowanie zajec w obrebie studenta
 	public boolean intertypecopy; // krzyzowanie zajec o roznych typach
+	public static int maxnbofmutation;
 	public Solution() {
 		
 	}
