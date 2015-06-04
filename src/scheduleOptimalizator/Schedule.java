@@ -1,5 +1,6 @@
 package scheduleOptimalizator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class Schedule extends Solution {
 	
 	
 
-	public static Schedule generate(List<Student> students, List<Class> classes) {
+	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes) {
 		Schedule schedule = new Schedule();
 		
 		for (Student student : students) {
