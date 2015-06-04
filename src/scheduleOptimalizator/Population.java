@@ -23,8 +23,9 @@ public class Population {
 	private List<Solution> solutions;
 	private Random generator = new Random();
 	private ArrayList<LinkedList<int[]>> logs = new ArrayList<LinkedList<int[]>>();
+	private DataLayer dataLayer;
 
-	Population(int elite, List<Solution> list){
+	Population(int elite, List<Solution> list, DataLayer dataLayer){
 		
 		if( elite>100 ){
 			throw new IllegalArgumentException("Elite must be smaller than 100");
@@ -33,6 +34,8 @@ public class Population {
 		Collections.copy(solutions,list);
 		Collections.sort(solutions);
 		size = solutions.size();
+		
+		this.dataLayer = dataLayer;
 		
 		for(int i = 0; i < size; i++ ){
 			logs.add(new LinkedList<int []>());
@@ -139,7 +142,7 @@ public class Population {
 				String[] a=Arrays.toString(nums).split("[\\[\\]]")[1].split(", "); 
 				writer.writeNext(a);
 			}
-			solutions.get(0).saveResults(directory);
+			solutions.get(0).saveResults(directory, dataLayer);
 		}
 		
 		// TODO Auto-generated method stub
