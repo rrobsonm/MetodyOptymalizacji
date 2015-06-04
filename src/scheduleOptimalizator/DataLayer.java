@@ -104,11 +104,11 @@ public class DataLayer {
 	             
 	}
 	
-	public ArrayList getStudentsList(){
+	public ArrayList<Student> getStudentsList(){
 		return students;
 	}
 	
-	public ArrayList getClassList(){
+	public ArrayList<Class> getClassList(){
 		return classes;
 	}
 	
