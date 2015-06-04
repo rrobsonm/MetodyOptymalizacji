@@ -115,6 +115,7 @@ public class GUI extends JFrame {
 		btnBrowseStudentPath.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent ae) {
 		        JFileChooser fileChooser = new JFileChooser();
+		        
 		        int returnValue = fileChooser.showOpenDialog(null);
 		        if (returnValue == JFileChooser.APPROVE_OPTION) {
 		          textFieldStudentsPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
@@ -139,7 +140,7 @@ public class GUI extends JFrame {
 		        JFileChooser fileChooser = new JFileChooser();
 		        int returnValue = fileChooser.showOpenDialog(null);
 		        if (returnValue == JFileChooser.APPROVE_OPTION) {
-		          textFieldOutputPath.setText(fileChooser.getSelectedFile().getAbsolutePath());
+		          textFieldOutputPath.setText(fileChooser.getCurrentDirectory().getAbsolutePath());
 		        }
 		      }
 		    });
