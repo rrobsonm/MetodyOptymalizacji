@@ -176,8 +176,13 @@ public class GUI extends JFrame {
 		horizontalBoxStart.add(btnStart);
 		btnStart.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent ae) {
-		        ProgramStarter programStarter = new ProgramStarter(textFieldClassesPath.getText(), textFieldStudentsPath.getText(),textFieldOutputPath.getText(), 0, 0, 0, 0, 0);
-		        programStarter.run();
+		    	  int size = Integer.parseInt(textFieldPopulationSize.getText());
+		    	  int elite = Integer.parseInt(textFieldPopulationElite.getText());
+		    	  int mutationLevel = Integer.parseInt(textFieldMutationLevel.getText());
+		    	  int crossLevel = Integer.parseInt(textFieldCrossLevel.getText());
+		    	  int maxIterations = Integer.parseInt(textFieldMaxIterations.getText());
+		    	  ProgramStarter programStarter = new ProgramStarter(textFieldClassesPath.getText(), textFieldStudentsPath.getText(),textFieldOutputPath.getText(), size, elite, mutationLevel, crossLevel, maxIterations);
+		    	  programStarter.run();
 		      }
 		    });
 		
