@@ -70,7 +70,6 @@ public class DataLayer {
 	      lineNumber = 0;
 	      while ((nextLine = reader.readNext()) != null) {
 	        lineNumber++;
-	        System.out.println(nextLine.length);
 	        
 	        //first param id
 	        int id = getStudentIntIdForStringId(nextLine[0]);
