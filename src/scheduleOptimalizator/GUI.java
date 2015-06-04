@@ -138,8 +138,17 @@ public class GUI extends JFrame {
 		btnBrowseOutputPath.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent ae) {
 		        JFileChooser fileChooser = new JFileChooser();
+		        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 		        int returnValue = fileChooser.showOpenDialog(null);
 		        if (returnValue == JFileChooser.APPROVE_OPTION) {
+		        	File file = fileChooser.getSelectedFile();
+		            if(file.isDirectory()) {
+		                fileChooser.setCurrentDirectory(file);
+		                fileChooser.rescanCurrentDirectory();
+		            }
+		            else {
+		                fileChooser.approveSelection();
+		            }
 		          textFieldOutputPath.setText(fileChooser.getCurrentDirectory().getAbsolutePath());
 		        }
 		      }
