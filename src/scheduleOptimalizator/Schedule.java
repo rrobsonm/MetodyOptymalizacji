@@ -17,14 +17,16 @@ public class Schedule extends Solution {
 
 	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
 		Schedule schedule = new Schedule();
-		classesfilledfactor = minpercentofclassesp/100;
-		minpercentofclassesp = minpercentofclassesp/100;
+		classesfilledfactor = ((double)minpercentofclassesp)/100;
+		minpercentofclasses = ((double)minpercentofclassesp)/100;
+		schedule.studentclassprojection = new ArrayList<StudentClassProjection>();
 		for (Student student : students) {
 			Random generator = new Random();
 			int nbofrequiredclasses = student.requiredClasses.length;
 			int nbofminclasses = (int)Math.ceil(nbofrequiredclasses*minpercentofclasses);
 			int randomnbofclasses=(int) (nbofminclasses*(1-classesfilledfactor)+generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)));
 			int nbofclasses = randomnbofclasses > nbofrequiredclasses ? nbofrequiredclasses :randomnbofclasses;
+			
 			for (int C=0; C<nbofclasses;C++) {
 				
 				int whattype = student.requiredClasses[C];
