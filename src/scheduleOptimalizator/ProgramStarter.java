@@ -9,13 +9,22 @@ import javax.swing.JOptionPane;
 public class ProgramStarter implements Runnable {
 
 	String classesPath, studentsPath, outputPath;
-	int size, elite, mutationLevel, crossLevel, maxIterations;
+	int size, elite, mutationLevel, crossLevel, maxIterations, minpercentofclasses, classesfilledfactor;
 	
 	
 	
 	
-	public ProgramStarter(String classesPath, String studentsPath, String outputPath, int size,
-			int elite, int mutationLevel, int crossLevel, int maxIterations) {
+	public ProgramStarter(
+			String classesPath, 
+			String studentsPath, 
+			String outputPath, 
+			int size,
+			int elite, 
+			int mutationLevel, 
+			int crossLevel, 
+			int maxIterations,
+			int minpercentofclasses,
+			int classesfilledfactor) {
 		super();
 		this.classesPath = classesPath;
 		this.studentsPath = studentsPath;
@@ -24,6 +33,8 @@ public class ProgramStarter implements Runnable {
 		this.mutationLevel = mutationLevel;
 		this.crossLevel = crossLevel;
 		this.maxIterations = maxIterations;
+		this.minpercentofclasses = minpercentofclasses;
+		this.classesfilledfactor = classesfilledfactor;
 	}
 
 	public void run(){
@@ -33,7 +44,7 @@ public class ProgramStarter implements Runnable {
 
 			List<Solution> solutions = new ArrayList<Solution>();
 			for(int i = 0; i < size; i++){
-				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList())));
+				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor));
 			}
 			
 			Population population = new Population(elite, solutions, dataLayer);

@@ -29,18 +29,49 @@ public class GUI extends JFrame {
 	private JTextField textFieldStudentsPath;
 	private JTextField textFieldOutputPath;
 	private JTextField textFieldClassesPath;
+	private JTextField textFieldminpercentofclasses;
+	private JTextField textFieldclassesfilledfactor;
 	
 	GUI(){
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JPanel panelParameters = new JPanel();
 		getContentPane().add(panelParameters);
-		panelParameters.setLayout(new BoxLayout(panelParameters, BoxLayout.X_AXIS));
+		panelParameters.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		Box verticalBoxParameters = Box.createVerticalBox();
+		Box verticalBoxGenerateParameters = Box.createVerticalBox();
+		panelParameters.add(verticalBoxGenerateParameters);
+		
+		JLabel generateParamsLabel = new JLabel("Generate Parameters");
+		verticalBoxGenerateParameters.add(generateParamsLabel);
+		
+		Box horizontalBox_1 = Box.createHorizontalBox();
+		verticalBoxGenerateParameters.add(horizontalBox_1);
+		
+		JLabel lblMinpercentofclasselabel = new JLabel("min % of generated classes");
+		horizontalBox_1.add(lblMinpercentofclasselabel);
+		
+		textFieldminpercentofclasses = new JTextField();
+		textFieldminpercentofclasses.setColumns(2);
+		horizontalBox_1.add(textFieldminpercentofclasses);
+		
+		Box horizontalBox_2 = Box.createHorizontalBox();
+		verticalBoxGenerateParameters.add(horizontalBox_2);
+		
+		JLabel classesfilledfactorLabel = new JLabel("avg % of generated classes");
+		horizontalBox_2.add(classesfilledfactorLabel);
+		
+		textFieldclassesfilledfactor = new JTextField();
+		textFieldclassesfilledfactor.setColumns(2);
+		horizontalBox_2.add(textFieldclassesfilledfactor);
+		
+		Box verticalBoxPopulationParameters = Box.createVerticalBox();
+		
+		JLabel populationParamsLabel = new JLabel("Population Parameters");
+		verticalBoxPopulationParameters.add(populationParamsLabel);
 		
 		Box horizontalBoxPopulationSize = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBoxPopulationSize);
+		verticalBoxPopulationParameters.add(horizontalBoxPopulationSize);
 		
 		JLabel lblPopulationSize = new JLabel("Population size");
 		horizontalBoxPopulationSize.add(lblPopulationSize);
@@ -50,7 +81,7 @@ public class GUI extends JFrame {
 		textFieldPopulationSize.setColumns(2);
 		
 		Box horizontalBoxPopulationElite = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBoxPopulationElite);
+		verticalBoxPopulationParameters.add(horizontalBoxPopulationElite);
 		
 		JLabel lblPopulationElite = new JLabel("Population elite");
 		horizontalBoxPopulationElite.add(lblPopulationElite);
@@ -60,7 +91,7 @@ public class GUI extends JFrame {
 		horizontalBoxPopulationElite.add(textFieldPopulationElite);
 		
 		Box horizontalBoxMutationLevel = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBoxMutationLevel);
+		verticalBoxPopulationParameters.add(horizontalBoxMutationLevel);
 		
 		JLabel lblMutationLevel = new JLabel("mutation level");
 		horizontalBoxMutationLevel.add(lblMutationLevel);
@@ -70,7 +101,7 @@ public class GUI extends JFrame {
 		horizontalBoxMutationLevel.add(textFieldMutationLevel);
 		
 		Box horizontalBoxCrossLevel = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBoxCrossLevel);
+		verticalBoxPopulationParameters.add(horizontalBoxCrossLevel);
 		
 		JLabel lblCrossLevel = new JLabel("Cross level");
 		horizontalBoxCrossLevel.add(lblCrossLevel);
@@ -80,7 +111,7 @@ public class GUI extends JFrame {
 		horizontalBoxCrossLevel.add(textFieldCrossLevel);
 		
 		Box horizontalBoxMaxIterations = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBoxMaxIterations);
+		verticalBoxPopulationParameters.add(horizontalBoxMaxIterations);
 		
 		JLabel lblMaxIterations = new JLabel("Max Iterations");
 		horizontalBoxMaxIterations.add(lblMaxIterations);
@@ -90,8 +121,8 @@ public class GUI extends JFrame {
 		horizontalBoxMaxIterations.add(textFieldMaxIterations);
 		
 		Box horizontalBox = Box.createHorizontalBox();
-		verticalBoxParameters.add(horizontalBox);
-		panelParameters.add(verticalBoxParameters);
+		verticalBoxPopulationParameters.add(horizontalBox);
+		panelParameters.add(verticalBoxPopulationParameters);
 		
 		JPanel panelPaths = new JPanel();
 		getContentPane().add(panelPaths);
@@ -191,7 +222,19 @@ public class GUI extends JFrame {
 		    	  int mutationLevel = Integer.parseInt(textFieldMutationLevel.getText());
 		    	  int crossLevel = Integer.parseInt(textFieldCrossLevel.getText());
 		    	  int maxIterations = Integer.parseInt(textFieldMaxIterations.getText());
-		    	  ProgramStarter programStarter = new ProgramStarter(textFieldClassesPath.getText(), textFieldStudentsPath.getText(),textFieldOutputPath.getText(), size, elite, mutationLevel, crossLevel, maxIterations);
+		    	  int minpercentofclasses = Integer.parseInt(textFieldminpercentofclasses.getText());
+		    	  int classesfilledfactor = Integer.parseInt(textFieldclassesfilledfactor.getText());
+		    	  ProgramStarter programStarter = new ProgramStarter(
+														    		 textFieldClassesPath.getText(), 
+														    		 textFieldStudentsPath.getText(),
+														     		 textFieldOutputPath.getText(), 
+														    	     size, 
+														    		 elite, 
+														    		 mutationLevel, 
+														    		 crossLevel,
+														    		 maxIterations,
+														    		 minpercentofclasses,
+														    		 classesfilledfactor);
 		    	  programStarter.run();
 		      }
 		    });
