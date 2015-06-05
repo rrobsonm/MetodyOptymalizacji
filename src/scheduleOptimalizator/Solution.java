@@ -57,5 +57,9 @@ public abstract class Solution implements Comparable<Solution> {
 	public Solution() {
 		
 	}
+	public void saveResults(String directory, DataLayer dataLayer) {
+		// TODO Auto-generated method stub
+		
+	}
 }
 
