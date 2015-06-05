@@ -59,48 +59,82 @@ public class Student {
 		}//Policzenie nieobecnoœci zajêæ KONIEC
 		absent = absentCounter;
 		
-		
-		//Policzenie czasu na zajeciach POCZATEK (mo¿e byæ problem z jednymi zajêciami, nie myœla³em o skrajnych przypoadkach dobrze narazie)
-		//pierwsze zajecia liczymy recznie bo maja jeden dojazd
-		int busyCounter = getTravelTime(slots[0][0]);
-		int timeStamp = slots[0][1];
-		busyCounter = busyCounter + slots[0][1] - slots[0][0];
-		
-		//zajecia nie skrajne liczymy petla
-		for(int i = 1 ; i < slots.length-1 ; ++i){
-			int diff = slots[i][0] - slots[i-1][1];
+		if(slots.length>2){
+			//Policzenie czasu na zajeciach POCZATEK (mo¿e byæ problem z jednymi zajêciami, nie myœla³em o skrajnych przypoadkach dobrze narazie)
+			//pierwsze zajecia liczymy recznie bo maja jeden dojazd
+			int busyCounter = getTravelTime(slots[0][0]);
+			int timeStamp = slots[0][1];
+			busyCounter = busyCounter + slots[0][1] - slots[0][0];
 			
-			if(diff > 0){//zajêcia nie zachodz¹ na siebie
-				if(diff > getTravelTime(slots[i-1][1]) + getTravelTime(slots[i][0])){//okno wiêksze ni¿ dojazd
-					busyCounter = busyCounter + slots[i][1] - slots[i][0] + getTravelTime(slots[i-1][1]) + getTravelTime(slots[i][0]);
-				} else{//okno mniejsze rowne dojazd
-					busyCounter = busyCounter + slots[i][1] - slots[i][0] + slots[i][0] - slots[i-1][1];
-				}
-				timeStamp = slots[i][1];
-				continue;
-			}else{//zajecia zachodza na siebie
-				if( slots[i][1] - slots[i-1][1] >= 0 ){//zachodza czesciowo
+			//zajecia nie skrajne liczymy petla
+			for(int i = 1 ; i < slots.length-1 ; ++i){
+				int diff = slots[i][0] - slots[i-1][1];
+				
+				if(diff > 0){//zajêcia nie zachodz¹ na siebie
+					if(diff > getTravelTime(slots[i-1][1]) + getTravelTime(slots[i][0])){//okno wiêksze ni¿ dojazd
+						busyCounter = busyCounter + slots[i][1] - slots[i][0] + getTravelTime(slots[i-1][1]) + getTravelTime(slots[i][0]);
+					} else{//okno mniejsze rowne dojazd
+						busyCounter = busyCounter + slots[i][1] - slots[i][0] + slots[i][0] - slots[i-1][1];
+					}
 					timeStamp = slots[i][1];
-					busyCounter = busyCounter + slots[i][1] - slots[i-1][1];
-				} else{//zachodza calkowicie
 					continue;
+				}else{//zajecia zachodza na siebie
+					if( slots[i][1] - slots[i-1][1] >= 0 ){//zachodza czesciowo
+						timeStamp = slots[i][1];
+						busyCounter = busyCounter + slots[i][1] - slots[i-1][1];
+					} else{//zachodza calkowicie
+						continue;
+					}
 				}
 			}
+			
+			
+			//trzeba jeszcze ostatnie zajecia policzyæ i dojazd timestamp ustawiony na koniec przedostatnich zajec, czas do timestampu
+			int diff = slots[slots.length-1][0] - timeStamp;
+			if(diff < 0){//je¿eli pocz¹tek ostatniego jest po timeStampie
+				if(diff > getTravelTime(slots[slots.length-1][0]) + getTravelTime(slots[slots.length-2][1])){//okno wiêksze ni¿ dojazd
+					busyCounter = busyCounter + slots[slots.length-1][1] - slots[slots.length-1][0] + getTravelTime(slots[slots.length-1][1]);
+				} else{//okno mniejsze rowne dojazd
+					busyCounter = busyCounter + slots[slots.length-1][0] - slots[slots.length-2][1] + slots[slots.length-1][1] - slots[slots.length-1][0];
+				}
+			} else {//zajecia nachodza na siebie
+				if(slots[slots.length-1][1]-slots[slots.length-2][1] >= 0){//zachodza czesciowo
+					busyCounter = busyCounter + slots[slots.length-1][1]-slots[slots.length-2][1] + getTravelTime(slots[slots.length-1][1]);
+				} //zachodza ca³kowicie brak akcji dodania czasu
+			}//Policzenie czasu na zajeciach KONIEC
+			busyTime = busyCounter;
 		}
-		//trzeba jeszcze ostatnie zajecia policzyæ i dojazd timestamp ustawiony na koniec przedostatnich zajec, czas do timestampu
-		int diff = slots[slots.length-1][0] - timeStamp;
-		if(diff < 0){//je¿eli pocz¹tek ostatniego jest po timeStampie
-			if(diff > getTravelTime(slots[slots.length-1][0]) + getTravelTime(slots[slots.length-2][1])){//okno wiêksze ni¿ dojazd
-				busyCounter = busyCounter + slots[slots.length-1][1] - slots[slots.length-1][0] + getTravelTime(slots[slots.length-1][1]);
-			} else{//okno mniejsze rowne dojazd
-				busyCounter = busyCounter + slots[slots.length-1][0] - slots[slots.length-2][1] + slots[slots.length-1][1] - slots[slots.length-1][0];
-			}
-		} else {//zajecia nachodza na siebie
-			if(slots[slots.length-1][1]-slots[slots.length-2][1] >= 0){//zachodza czesciowo
-				busyCounter = busyCounter + slots[slots.length-1][1]-slots[slots.length-2][1] + getTravelTime(slots[slots.length-1][1]);
-			} //zachodza ca³kowicie brak akcji dodania czasu
-		}//Policzenie czasu na zajeciach KONIEC
-		busyTime = busyCounter;
+		if(slots.length==2){
+			//pierwsze zajecia liczymy recznie bo maja jeden dojazd
+			int busyCounter = getTravelTime(slots[0][0]);
+			int timeStamp = slots[0][1];
+			busyCounter = busyCounter + slots[0][1] - slots[0][0];
+			
+			
+			//trzeba jeszcze ostatnie zajecia policzyæ i dojazd timestamp ustawiony na koniec przedostatnich zajec, czas do timestampu
+			int diff = slots[slots.length-1][0] - timeStamp;
+			if(diff < 0){//je¿eli pocz¹tek ostatniego jest po timeStampie
+				if(diff > getTravelTime(slots[slots.length-1][0]) + getTravelTime(slots[slots.length-2][1])){//okno wiêksze ni¿ dojazd
+					busyCounter = busyCounter + slots[slots.length-1][1] - slots[slots.length-1][0] + getTravelTime(slots[slots.length-1][1]);
+				} else{//okno mniejsze rowne dojazd
+					busyCounter = busyCounter + slots[slots.length-1][0] - slots[slots.length-2][1] + slots[slots.length-1][1] - slots[slots.length-1][0];
+				}
+			} else {//zajecia nachodza na siebie
+				if(slots[slots.length-1][1]-slots[slots.length-2][1] >= 0){//zachodza czesciowo
+					busyCounter = busyCounter + slots[slots.length-1][1]-slots[slots.length-2][1] + getTravelTime(slots[slots.length-1][1]);
+				} //zachodza ca³kowicie brak akcji dodania czasu
+			}//Policzenie czasu na zajeciach KONIEC
+			busyTime = busyCounter;
+		}
+		if(slots.length==1){
+			//pierwsze zajecia liczymy recznie bo maja jeden dojazd
+			int busyCounter = getTravelTime(slots[0][0]);
+			int timeStamp = slots[0][1];
+			busyCounter = getTravelTime(slots[0][0]) + slots[0][1] - slots[0][0] + getTravelTime(slots[0][10]);
+			
+			busyTime = busyCounter;
+		}
+		
 		
 		
 	}
