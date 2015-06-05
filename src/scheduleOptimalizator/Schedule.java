@@ -24,7 +24,7 @@ public class Schedule extends Solution {
 			Random generator = new Random();
 			int nbofrequiredclasses = student.requiredClasses.length;
 			int nbofminclasses = (int)Math.ceil(nbofrequiredclasses*minpercentofclasses);
-			int randomnbofclasses=(int) (nbofminclasses*(1-classesfilledfactor)+generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)));
+			int randomnbofclasses=(int) (nbofminclasses*(classesfilledfactor)+ ((nbofrequiredclasses-nbofminclasses) > 0 ? generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)) : 0));
 			int nbofclasses = randomnbofclasses > nbofrequiredclasses ? nbofrequiredclasses :randomnbofclasses;
 			
 			for (int C=0; C<nbofclasses;C++) {
