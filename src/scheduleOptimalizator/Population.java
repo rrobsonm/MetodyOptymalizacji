@@ -95,12 +95,16 @@ public class Population {
 		cp[NUMBER_OF_THREADS - 1].run();
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS; ++i){
-			while(cp[i].ended=false){};	
-			solutions.addAll(cp[i].getChilds());
-			//test
+			while(cp[i].ended==false){};	
 			
+			//test		
+		}
+		for(int i =0 ; i < NUMBER_OF_THREADS; ++i){
+			solutions.addAll(cp[i].getChilds());
+			//test		
 		}
 		
+
 	}
 	
 	class CrossingPhase extends Thread{
