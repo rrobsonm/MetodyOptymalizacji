@@ -25,13 +25,24 @@ public class Population {
 	private ArrayList<LinkedList<int[]>> logs = new ArrayList<LinkedList<int[]>>();
 	private DataLayer dataLayer;
 
-	Population(int elite, List<Solution> list, DataLayer dataLayer){
+	Population(int elite, List<Solution> list, int crossLevel, int mutationLevel, DataLayer dataLayer){
 		
 		if( elite>100 ){
 			throw new IllegalArgumentException("Elite must be smaller than 100");
 		}
+		this.elite = elite;
+		if( crossLevel>100 ){
+			throw new IllegalArgumentException("crossLevel must be smaller than 100");
+		}
+		this.crossLevel = crossLevel;
+		if( mutationLevel>100 ){
+			throw new IllegalArgumentException("mutationLevel must be smaller than 100");
+		}
+		this.mutationLevel = mutationLevel;
 		solutions = new ArrayList<Solution>(list.size()*2);
-		Collections.copy(solutions,list);
+		for (int i = 0; i < list.size(); i++) {
+			solutions.add(list.get(i));
+		}
 		Collections.sort(solutions);
 		size = solutions.size();
 		
@@ -71,19 +82,23 @@ public class Population {
 	private void crossingPhase() throws InterruptedException{//losujemy (size-elite*size)*crossLevel/100 par i tworzymy tyle dzieci. Ka¿de dziecko dodawane jest na koniec solutions
 		
 		CrossingPhase[] cp = new CrossingPhase[NUMBER_OF_THREADS];
-		int pairs = (size-elite*size)*crossLevel/100/NUMBER_OF_THREADS;
+		int pairs = (int) (((size-elite*size/100.0)*crossLevel)/100);
 		
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS - 1; ++i){
 			cp[i]=new CrossingPhase(pairs/NUMBER_OF_THREADS);
 			cp[i].run();
+			//TESTtesttestasdasd
+			
 		}
 		cp[NUMBER_OF_THREADS - 1] = new CrossingPhase(pairs/NUMBER_OF_THREADS+pairs%NUMBER_OF_THREADS);
 		cp[NUMBER_OF_THREADS - 1].run();
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS; ++i){
-			cp[i].wait();
+			while(cp[i].ended=false){};	
 			solutions.addAll(cp[i].getChilds());
+			//test
+			
 		}
 		
 	}
@@ -91,8 +106,8 @@ public class Population {
 	class CrossingPhase extends Thread{
 
 		private int numberOfPairs;
-		private List<Solution> childs;
-		private boolean ended = false;
+		private List<Solution> childs = new ArrayList<Solution>();
+		public boolean ended = false;
 		
 		CrossingPhase(int numberOfPairs){
 			this.numberOfPairs = numberOfPairs;
@@ -115,7 +130,6 @@ public class Population {
 				childs.add(tmp);
 			}
 			ended = true;
-			notify();
 		}
 		
 	}
