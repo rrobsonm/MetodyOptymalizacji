@@ -153,7 +153,7 @@ public class Population {
 		
 				
 		for(int i = 0; i < logs.size(); i++){
-			CSVWriter writer = new CSVWriter(new FileWriter(directory+"/"+i+".csv"));
+			CSVWriter writer = new CSVWriter(new FileWriter(directory+"/"+"solution_"+i+".csv"));
 			ListIterator iterator = logs.get(i).listIterator();
 			while(iterator.hasNext()){
 				int[] nums = (int[]) iterator.next();
