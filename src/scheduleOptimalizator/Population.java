@@ -73,7 +73,7 @@ public class Population {
 	private void replacmentPhase() {
 		// TODO Auto-generated method stub
 		Collections.sort(solutions);
-		for(int i = solutions.size(); i >= size; i--){
+		for(int i = solutions.size()-1; i >= size; i--){
 			solutions.remove(i);
 		}
 		
