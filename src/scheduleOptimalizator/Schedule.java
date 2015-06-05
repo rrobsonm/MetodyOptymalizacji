@@ -106,7 +106,7 @@ public class Schedule extends Solution {
 				for(int i=0; i<classesinstudent.size();i++) {
 					slots[i][1]=classesinstudent.get(i).classes.getStartSlot();
 					slots[i][2]=classesinstudent.get(i).classes.getStartSlot()+classesinstudent.get(i).classes.getNumberOfSlots();
-					simpleclasses[i]=classesinstudent.get(i).classes.getType();
+					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
 				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes);
