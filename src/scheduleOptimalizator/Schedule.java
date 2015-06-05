@@ -30,7 +30,7 @@ public class Schedule extends Solution {
 			for (int C=0; C<nbofclasses;C++) {
 				
 				int whattype = student.requiredClasses[C];
-				List<Class> tmpclass = classes;
+				List<Class> tmpclass = new ArrayList<Class>(classes);
 				tmpclass.removeIf(p -> p.getType()!=whattype);
 
 				StudentClassProjection classprojection = new StudentClassProjection(student, tmpclass.get(generator.nextInt(tmpclass.size())));
