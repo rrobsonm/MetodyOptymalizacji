@@ -28,6 +28,7 @@ public class ProgramStarter implements Runnable {
 		super();
 		this.classesPath = classesPath;
 		this.studentsPath = studentsPath;
+		this.outputPath = outputPath;
 		this.size = size;
 		this.elite = elite;
 		this.mutationLevel = mutationLevel;
@@ -47,7 +48,7 @@ public class ProgramStarter implements Runnable {
 				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor));
 			}
 			
-			Population population = new Population(elite, solutions, dataLayer);
+			Population population = new Population(elite, solutions, crossLevel, mutationLevel, dataLayer);
 			
 			for(int i = 0; i < maxIterations ; ++i){
 				population.evolve();
