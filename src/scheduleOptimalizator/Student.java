@@ -130,7 +130,7 @@ public class Student {
 			//pierwsze zajecia liczymy recznie bo maja jeden dojazd
 			int busyCounter = getTravelTime(slots[0][0]);
 			int timeStamp = slots[0][1];
-			busyCounter = getTravelTime(slots[0][0]) + slots[0][1] - slots[0][0] + getTravelTime(slots[0][10]);
+			busyCounter = getTravelTime(slots[0][0]) + slots[0][1] - slots[0][0] + getTravelTime(slots[0][1]);
 			
 			busyTime = busyCounter;
 		}
