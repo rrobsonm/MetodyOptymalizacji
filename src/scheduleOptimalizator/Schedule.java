@@ -104,8 +104,8 @@ public class Schedule extends Solution {
 				int[] simpleclasses;
 				simpleclasses = new int[classesinstudent.size()];
 				for(int i=0; i<classesinstudent.size();i++) {
-					slots[i][1]=classesinstudent.get(i).classes.getStartSlot();
-					slots[i][2]=classesinstudent.get(i).classes.getStartSlot()+classesinstudent.get(i).classes.getNumberOfSlots();
+					slots[i][0]=classesinstudent.get(i).classes.getStartSlot();
+					slots[i][1]=classesinstudent.get(i).classes.getStartSlot()+classesinstudent.get(i).classes.getNumberOfSlots();
 					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
