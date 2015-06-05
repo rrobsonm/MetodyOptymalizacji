@@ -13,6 +13,8 @@ public class Schedule extends Solution {
 	private static double minpercentofclasses; // %- of required classes ( from 0 to 1)
 	private static double classesfilledfactor; // classes fill factor (from 0 to 1) 1 - all required classes 0 -min nb of classes (linear)
 	private int rating;
+	private int absentstudents;
+	private int clashes;
 	
 
 	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
@@ -85,13 +87,19 @@ public class Schedule extends Solution {
 	@Override
 	public int[] getStats() {
 		// TODO Auto-generated method stub
-		return null;
+		int[] result = new int[3];
+		result[0]=this.rating;
+		result[1]=this.clashes;
+		result[2]=this.absentstudents;
+		return result;
 	}
 
 	@Override
 	public void updateValues() {
 		// TODO Auto-generated method stub
 		int allstudentsrating = 0;
+		int allclashes=0;
+		int allabsent=0;
 		for (StudentClassProjection projection : studentclassprojection) {
 			ArrayList<Student> studentsinprojection = new ArrayList<Student>();
 			studentsinprojection = this.getStudents();
@@ -110,9 +118,13 @@ public class Schedule extends Solution {
 				}
 				student.updateValues(slots, simpleclasses);
 				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes);
+				allclashes+=student.clashes;
+				allabsent=student.absent;
 			}
 		}
 		this.rating=allstudentsrating;
+		this.absentstudents=allabsent;
+		this.clashes=allclashes;
 		
 	}
 
