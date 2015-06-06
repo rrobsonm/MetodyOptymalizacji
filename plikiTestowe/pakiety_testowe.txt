@@ -1,0 +1,4 @@
+Do przetestowania pakiety:
+* student_easy & classes_easy
+* student_long & classes_easy
+* ... (w trakcie)
