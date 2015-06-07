@@ -1,6 +1,11 @@
 package scheduleOptimalizator;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import com.opencsv.CSVWriter;
 
 public abstract class Solution implements Comparable<Solution> {
 	static public class StudentClassProjection {
@@ -57,8 +62,21 @@ public abstract class Solution implements Comparable<Solution> {
 	public Solution() {
 		
 	}
-	public void saveResults(String directory, DataLayer dataLayer) {
+	public void saveResults(String directory, DataLayer dataLayer) throws IOException {
 		// TODO Auto-generated method stub
+		CSVWriter writer = new CSVWriter(new FileWriter(directory+"/"+"student_schedule.csv"));
+		for(Student student : this.getStudents()) {
+			List<String> schedule = new ArrayList<String>();
+			schedule.add(dataLayer.getStudentStringIdForInt(student.getId()));
+			
+			List<StudentClassProjection> classesinstudent= (studentclassprojection.stream().filter(x -> x.students.getId() == student.getId()).collect(Collectors.toList()));
+			for (StudentClassProjection classes : classesinstudent) {
+				schedule.add(dataLayer.getClassStringIdForInt(classes.classes.getType()));
+				
+			}
+			writer.writeNext(Arrays.toString(schedule.toArray()).split("[\\[\\]]")[1].split(", "));
+		}
+		writer.close();
 		
 	}
 }

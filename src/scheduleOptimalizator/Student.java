@@ -38,7 +38,8 @@ public class Student {
 			int difference = slots[i+1][0] - slots[i][1];
 			if( difference <= 0){
 				++cashesCounter;
-				for(int j=i+2; (slots[j][0] - slots[i][1] <= 0) && (j < slots.length); ++j){
+				
+				for(int j=i+2; (j < slots.length) && (slots[j][0] - slots[i][1] <= 0); ++j){
 					++cashesCounter;
 				}
 			}

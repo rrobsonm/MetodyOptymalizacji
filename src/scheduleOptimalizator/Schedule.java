@@ -1,6 +1,8 @@
 package scheduleOptimalizator;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.*;
@@ -28,7 +30,7 @@ public class Schedule extends Solution {
 			int nbofminclasses = (int)Math.ceil(nbofrequiredclasses*minpercentofclasses);
 			int randomnbofclasses=(int) (nbofminclasses*(classesfilledfactor)+ ((nbofrequiredclasses-nbofminclasses) > 0 ? generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)) : 0));
 			int nbofclasses = randomnbofclasses > nbofrequiredclasses ? nbofrequiredclasses :randomnbofclasses;
-			
+			shuffleArray(student.requiredClasses);
 			for (int C=0; C<nbofclasses;C++) {
 				
 				int whattype = student.requiredClasses[C];
@@ -48,20 +50,38 @@ public class Schedule extends Solution {
 		Solution newsollution = new scheduleOptimalizator.Schedule();
 		int minnbofprojection = studentclassprojection.size() > sollution.studentclassprojection.size() ? 2 : 1;
 		List<StudentClassProjection> currentprojection;
+		List<StudentClassProjection> otherprojection;
+
+		List<StudentClassProjection> newprojection = new ArrayList<Solution.StudentClassProjection>();
 		if(minnbofprojection==1) {
 			currentprojection=this.studentclassprojection;
+			otherprojection=sollution.studentclassprojection;
 		} else {
 			currentprojection=sollution.studentclassprojection;
+			otherprojection=this.studentclassprojection;
 		}
-		int changestudentfromplace = generator.nextInt(currentprojection.size());
+		int changestudentfromplace=0;
+		if(currentprojection.size()>0) {
+		changestudentfromplace = generator.nextInt(currentprojection.size());
+		}
 		int countprojection=0;
+		Collections.shuffle(currentprojection);
 		for(StudentClassProjection projection : currentprojection) {
 			if(changestudentfromplace>countprojection) {
-				
+				StudentClassProjection newproj = otherprojection.get(countprojection);
+				newproj.students=currentprojection.get(countprojection).students;
+				if(generator.nextInt(1)==1) {
+					currentprojection.set(countprojection, newproj);
+				} else {
+					newprojection.add(newproj);
+				}
 			} 
 			countprojection++;
 		}
 		newsollution.studentclassprojection=currentprojection;
+		for(StudentClassProjection newproj : newprojection) {
+			newsollution.studentclassprojection.add(newproj);
+		}
 		return newsollution;
 	}
 
@@ -117,7 +137,7 @@ public class Schedule extends Solution {
 					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
-				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes);
+				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes-10*student.absent);
 				allclashes+=student.clashes;
 				allabsent=student.absent;
 			}
@@ -127,5 +147,16 @@ public class Schedule extends Solution {
 		this.clashes=allclashes;
 		
 	}
-
+	  static void shuffleArray(int[] ar)
+	  {
+	    Random rnd = new Random();
+	    for (int i = ar.length - 1; i > 0; i--)
+	    {
+	      int index = rnd.nextInt(i + 1);
+	      // Simple swap
+	      int a = ar[index];
+	      ar[index] = ar[i];
+	      ar[i] = a;
+	    }
+	  }
 }

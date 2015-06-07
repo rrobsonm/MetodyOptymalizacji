@@ -160,7 +160,9 @@ public class Population {
 				String[] a=Arrays.toString(nums).split("[\\[\\]]")[1].split(", "); 
 				writer.writeNext(a);
 			}			
+			writer.close();
 		}
+		
 		solutions.get(0).saveResults(directory, dataLayer);
 		
 		// TODO Auto-generated method stub

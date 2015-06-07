@@ -119,6 +119,14 @@ public class DataLayer {
 	    }
 	    return null;
 	}
+	public String getClassStringIdForInt(int i){
+		for (Entry<String, Integer> entry : classesNamesTranslations.entrySet()) {
+	        if (Objects.equals(i, entry.getValue())) {
+	            return entry.getKey();
+	        }
+	    }
+	    return null;
+	}
 	
 	public int getStudentIntIdForStringId(String str){
 		return studentsIdTranslations.get(str);
