@@ -17,6 +17,10 @@ public class Schedule extends Solution {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
+	private int target_penalty_absent;
+	private int target_penalty_clashes;
+	private int target_add_busytime;
+	
 	
 
 	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
@@ -72,14 +76,15 @@ public class Schedule extends Solution {
 				newproj.students=currentprojection.get(countprojection).students;
 				if(generator.nextInt(1)==1) {
 					currentprojection.set(countprojection, newproj);
-				} else {
+				} 
+				else {
 					newprojection.add(newproj);
 				}
 			} 
 			countprojection++;
 		}
 		newsollution.studentclassprojection=currentprojection;
-		newsollution.studentclassprojection.addAll(newprojection);
+		//newsollution.studentclassprojection.addAll(newprojection);
 		
 		return newsollution;
 	}
@@ -136,7 +141,7 @@ public class Schedule extends Solution {
 					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
-				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes-10*student.absent);
+				allstudentsrating+=(int)Math.floor(target_add_busytime/(double)student.busyTime-target_penalty_clashes*(double)student.clashes-target_penalty_absent*(double)student.absent);
 				allclashes+=student.clashes;
 				allabsent=student.absent;
 			}
