@@ -31,6 +31,9 @@ public class GUI extends JFrame {
 	private JTextField textFieldClassesPath;
 	private JTextField textFieldminpercentofclasses;
 	private JTextField textFieldclassesfilledfactor;
+	private JTextField textFieldTarget_Penalty_absend;
+	private JTextField textFieldTarget_Penalty_clashes;
+	private JTextField textFieldAddBusytime;
 	
 	GUI(){
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -38,6 +41,45 @@ public class GUI extends JFrame {
 		JPanel panelParameters = new JPanel();
 		getContentPane().add(panelParameters);
 		panelParameters.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		Box verticalBoxTargetParamters = Box.createVerticalBox();
+		panelParameters.add(verticalBoxTargetParamters);
+		
+		JLabel labelTargetParameters = new JLabel("Target fun. params");
+		verticalBoxTargetParamters.add(labelTargetParameters);
+		
+		Box horizontalBox_3 = Box.createHorizontalBox();
+		verticalBoxTargetParamters.add(horizontalBox_3);
+		
+		JLabel labelTarget_penalty_absent = new JLabel("target penalty absent");
+		horizontalBox_3.add(labelTarget_penalty_absent);
+		
+		textFieldTarget_Penalty_absend = new JTextField();
+		textFieldTarget_Penalty_absend.setText("100");
+		textFieldTarget_Penalty_absend.setColumns(2);
+		horizontalBox_3.add(textFieldTarget_Penalty_absend);
+		
+		Box horizontalBox_4 = Box.createHorizontalBox();
+		verticalBoxTargetParamters.add(horizontalBox_4);
+		
+		JLabel lblTargetpenaltyclashes = new JLabel("penalty clashes");
+		horizontalBox_4.add(lblTargetpenaltyclashes);
+		
+		textFieldTarget_Penalty_clashes = new JTextField();
+		textFieldTarget_Penalty_clashes.setText("10");
+		textFieldTarget_Penalty_clashes.setColumns(2);
+		horizontalBox_4.add(textFieldTarget_Penalty_clashes);
+		
+		Box horizontalBox_5 = Box.createHorizontalBox();
+		verticalBoxTargetParamters.add(horizontalBox_5);
+		
+		JLabel lblAddBusytime = new JLabel("add busytime");
+		horizontalBox_5.add(lblAddBusytime);
+		
+		textFieldAddBusytime = new JTextField();
+		textFieldAddBusytime.setText("50");
+		textFieldAddBusytime.setColumns(2);
+		horizontalBox_5.add(textFieldAddBusytime);
 		
 		Box verticalBoxGenerateParameters = Box.createVerticalBox();
 		panelParameters.add(verticalBoxGenerateParameters);
@@ -224,6 +266,9 @@ public class GUI extends JFrame {
 		    	  int maxIterations = Integer.parseInt(textFieldMaxIterations.getText());
 		    	  int minpercentofclasses = Integer.parseInt(textFieldminpercentofclasses.getText());
 		    	  int classesfilledfactor = Integer.parseInt(textFieldclassesfilledfactor.getText());
+		    	  int target_penalty_absent = Integer.parseInt(textFieldTarget_Penalty_absend.getText());
+		    	  int target_penalty_clashes = Integer.parseInt(textFieldTarget_Penalty_clashes.getText());
+		    	  int target_add_busytime = Integer.parseInt(textFieldAddBusytime.getText());
 		    	  ProgramStarter programStarter = new ProgramStarter(
 														    		 textFieldClassesPath.getText(), 
 														    		 textFieldStudentsPath.getText(),
@@ -234,7 +279,10 @@ public class GUI extends JFrame {
 														    		 crossLevel,
 														    		 maxIterations,
 														    		 minpercentofclasses,
-														    		 classesfilledfactor);
+														    		 classesfilledfactor,
+														    		 target_penalty_absent,
+														    		 target_penalty_clashes,
+														    		 target_add_busytime);
 		    	  programStarter.run();
 		      }
 		    });

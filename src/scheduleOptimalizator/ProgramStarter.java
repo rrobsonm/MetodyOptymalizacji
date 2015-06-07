@@ -10,10 +10,38 @@ public class ProgramStarter implements Runnable {
 
 	String classesPath, studentsPath, outputPath;
 	int size, elite, mutationLevel, crossLevel, maxIterations, minpercentofclasses, classesfilledfactor;
+	int target_penalty_absent;
+	int target_penalty_clashes;
+	int target_add_busytime;
 	
 	
 	
 	
+	public ProgramStarter(String classesPath, String studentsPath,
+			String outputPath, int size, int elite, int mutationLevel,
+			int crossLevel, int maxIterations, int minpercentofclasses,
+			int classesfilledfactor, int target_penalty_absent,
+			int target_penalty_clashes, int target_add_busytime) {
+		super();
+		this.classesPath = classesPath;
+		this.studentsPath = studentsPath;
+		this.outputPath = outputPath;
+		this.size = size;
+		this.elite = elite;
+		this.mutationLevel = mutationLevel;
+		this.crossLevel = crossLevel;
+		this.maxIterations = maxIterations;
+		this.minpercentofclasses = minpercentofclasses;
+		this.classesfilledfactor = classesfilledfactor;
+		this.target_penalty_absent = target_penalty_absent;
+		this.target_penalty_clashes = target_penalty_clashes;
+		this.target_add_busytime = target_add_busytime;
+	}
+
+
+
+
+	/*
 	public ProgramStarter(
 			String classesPath, 
 			String studentsPath, 
@@ -36,7 +64,7 @@ public class ProgramStarter implements Runnable {
 		this.maxIterations = maxIterations;
 		this.minpercentofclasses = minpercentofclasses;
 		this.classesfilledfactor = classesfilledfactor;
-	}
+	}*/
 
 	public void run(){
 		try {
@@ -45,7 +73,7 @@ public class ProgramStarter implements Runnable {
 
 			List<Solution> solutions = new ArrayList<Solution>();
 			for(int i = 0; i < size; i++){
-				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor));
+				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor, target_penalty_absent, target_penalty_clashes, target_add_busytime));
 			}
 			
 			Population population = new Population(elite, solutions, crossLevel, mutationLevel, dataLayer);
