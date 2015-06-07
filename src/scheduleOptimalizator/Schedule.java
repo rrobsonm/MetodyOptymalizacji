@@ -65,7 +65,7 @@ public class Schedule extends Solution {
 		changestudentfromplace = generator.nextInt(currentprojection.size());
 		}
 		int countprojection=0;
-		Collections.shuffle(currentprojection);
+		//Collections.shuffle(currentprojection);
 		for(StudentClassProjection projection : currentprojection) {
 			if(changestudentfromplace>countprojection) {
 				StudentClassProjection newproj = otherprojection.get(countprojection);
@@ -79,9 +79,8 @@ public class Schedule extends Solution {
 			countprojection++;
 		}
 		newsollution.studentclassprojection=currentprojection;
-		for(StudentClassProjection newproj : newprojection) {
-			newsollution.studentclassprojection.add(newproj);
-		}
+		newsollution.studentclassprojection.addAll(newprojection);
+		
 		return newsollution;
 	}
 
