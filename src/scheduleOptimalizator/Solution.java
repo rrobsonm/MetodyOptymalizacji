@@ -93,5 +93,9 @@ public abstract class Solution implements Comparable<Solution> {
 		writer.close();
 		
 	}
+	public Solution cross2(Solution sollution) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
