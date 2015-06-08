@@ -285,7 +285,9 @@ public class Schedule extends Solution  {
 	public Solution mutate() {
 		// TODO Auto-generated method stub
 		Random generator = new Random();
-		int nbofmutation = generator.nextInt((int)Math.ceil(maxnbofmutation*this.studentclassprojection.size()/100));
+		int nbm = (int)Math.ceil(maxnbofmutation*this.studentclassprojection.size()/100);
+		nbm = nbm>0 ? nbm : 1;
+		int nbofmutation = generator.nextInt(nbm);
 		nbofmutation = nbofmutation > this.studentclassprojection.size() ? this.studentclassprojection.size() : nbofmutation;
 		for (int i =0;i<nbofmutation;i++) {
 			int studentid = generator.nextInt(this.getStudents().size());
