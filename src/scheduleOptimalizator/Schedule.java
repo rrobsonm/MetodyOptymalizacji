@@ -24,7 +24,8 @@ public class Schedule extends Solution  {
 	private int clashes;
 	private int target_penalty_absent=100;
 	private int target_penalty_clashes=20;
-	private int target_add_busytime=25000;
+	private int target_add_busytime=20000;
+	private int interstudentchange=50;
 	
 	
 
@@ -83,18 +84,18 @@ public class Schedule extends Solution  {
 			currentsollution=(Schedule) sollution;
 			othersollution=this;
 		}
-		/*int changestudentfromplace=0;
+		int changestudentfromplace=0;
 		if(currentprojection.size()>0) {
 			changestudentfromplace = generator.nextInt(currentprojection.size());
-		}*/
+		}/**/
 		int countprojection=0;
 		int countprojection2=0;
-		//Collections.shuffle(currentprojection);
-		//Collections.shuffle(otherprojection);
+		Collections.shuffle(currentprojection);
+		Collections.shuffle(otherprojection);
 		
 		List<StudentClassProjection> newprojection = new ArrayList<StudentClassProjection>(currentprojection);
-		List<StudentClassProjection> newprojection2 = new ArrayList<StudentClassProjection>(currentprojection);
-		/*for(StudentClassProjection projection : currentprojection) {
+		
+		for(StudentClassProjection projection : currentprojection) {
 			if(changestudentfromplace>countprojection) {
 				StudentClassProjection newproj = otherprojection.get(countprojection);
 				//newproj.students=currentprojection.get(countprojection).students;
@@ -118,30 +119,23 @@ public class Schedule extends Solution  {
 			countprojection2++;
 			
 		}
-		*/
-		int changestudentfromplace=0;
+		/*int changestudentfromplace=0;
 		if(currentprojection.size()>0) {
 			changestudentfromplace = generator.nextInt(currentsollution.getStudents().size());
 		}
-		if(currentsollution.getStudents().size()!=4) {
-			int i = 0;
-
-			i=currentsollution.getStudents().size();
-			i=currentsollution.getStudents().size();
-		}
-		if(othersollution.getStudents().size()!=4) {
-			int i = 0;
-
-			i=currentsollution.getStudents().size();
-			i=currentsollution.getStudents().size();
-		}
+		
 		for(Student student : currentsollution.getStudents()) {
 			if(changestudentfromplace>countprojection) {
-				List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
-				if(new2.size()>0) {
-					newprojection.removeIf(x -> x.students.getId() == student.getId());
-					newprojection.addAll(new2);
+				for(int i=0;i<Math.ceil(currentsollution.getClassesForStudent(student.getId()).size()*interstudentchange/100);i++) {
+					
+					StudentClassProjection newinterstudentprojection = new StudentClassProjection(student, lecture);
+					
 				}
+				//List<StudentClassProjection> new2 = new ArrayList<StudentClassProjection>(othersollution.getClassesForStudent(student.getId()));
+				//if(new2.size()>0) {
+					//newprojection.removeIf(x -> x.students.getId() == student.getId());
+				//	newprojection.addAll(new2);
+				//}
 				//for(StudentClassProjection projection : currentsollution.getClassesForStudent(student.getId())) {
 				//	
 				//}
@@ -152,34 +146,19 @@ public class Schedule extends Solution  {
 			StudentClassProjection newproj=new StudentClassProjection(othersollution.studentclassprojection.get((new Random()).nextInt(othersollution.studentclassprojection.size())));
 			
 			newproj.students=student;
-			if(countstudentreq>currentclasses) {
+			if(countstudentreq+1>currentclasses) {
 				//newproj.students=currentprojection.get(countprojection).students;
 				newprojection.add(newproj);
 				//countprojection2++;
-			} else if (countstudentreq<currentclasses) {
-				//if(countprojection<newprojection.size())
-			//	newprojection.remove(newprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0));
+			} else if (countstudentreq-1<currentclasses) {
+				if(countprojection<newprojection.size())
+				newprojection.remove(newprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0));
 				//countprojection2--;
 			}
-		}
-		if(currentsollution.getStudents().size()!=4) {
-			int i = 0;
-
-			i=currentsollution.getStudents().size();
-			i=currentsollution.getStudents().size();
-		}
-		if(othersollution.getStudents().size()!=4) {
-			int i = 0;
-
-			i=currentsollution.getStudents().size();
-			i=currentsollution.getStudents().size();
-		}
+		}*/
 		newsollution.studentclassprojection=newprojection;
 
-		if(newsollution.getStudents().size()!=4) {
-			int i =0;
-			i=newsollution.getStudents().size();
-		}
+		
 		return newsollution;
 	}
 
