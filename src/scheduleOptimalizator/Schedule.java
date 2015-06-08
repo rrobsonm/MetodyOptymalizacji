@@ -1,15 +1,20 @@
 package scheduleOptimalizator;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
+
 import java.util.Collections;
+
 import java.util.List;
+
 import java.util.Random;
+
 import java.util.stream.*;
 
 public class Schedule extends Solution  {
 
-	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
+	//Tutaj bym zrobiÂ³ jakies odwzorowanie studentÃ³w na zajÃªcia. JakaÅ“ macieÂ¿ idStudenta x przedmioty.
 	//List<Student> students;
 	//List<Class> classes;
 	private static double minpercentofclasses; // %- of required classes ( from 0 to 1)
