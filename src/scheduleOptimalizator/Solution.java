@@ -31,6 +31,12 @@ public abstract class Solution implements Comparable<Solution> {
 	        return this.students.equals(other.students);
 	    }
 		
+		public StudentClassProjection(StudentClassProjection in) {
+			this.students = in.students;
+			this.classes = in.classes;
+			id=students.getId();
+		}
+		
 	}
 	abstract public Solution cross(Solution sollution);
 	abstract public Solution  mutate();
