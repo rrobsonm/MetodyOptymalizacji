@@ -63,7 +63,8 @@ public class ProgramStarter implements Runnable {
 						target_add_busytime,
 						interstudentchange,
 						studentexchangenb,
-						maxnbofmutation));
+						maxnbofmutation, 
+						target_overload_classes));
 			}
 			
 			Population population = new Population(elite, solutions, crossLevel, mutationLevel, dataLayer);
