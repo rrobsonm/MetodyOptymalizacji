@@ -19,11 +19,11 @@ public class Schedule extends Solution  {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
-	private int target_penalty_absent=5000;
-	private int target_penalty_clashes=500000;
-	private int target_add_busytime=2;
-	private int interstudentchange=50;
-	private int studentexchangenb=50;
+	static private int target_penalty_absent=5000;
+	static private int target_penalty_clashes=500000;
+	static private int target_add_busytime=2;
+	static private int interstudentchange=50;
+	static private int studentexchangenb=50;
 	
 	
 
@@ -44,7 +44,13 @@ public class Schedule extends Solution  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp)  {
+	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp, int penaltyabsent, int penaltyclashes, int addbusytime, int interstudentchanges, int studentexchanges, int maxmutation)  {
+		target_penalty_absent=penaltyabsent;
+		target_penalty_clashes=penaltyclashes;
+		target_add_busytime=addbusytime;
+		interstudentchange=interstudentchanges;
+		studentexchangenb=studentexchanges;
+		maxnbofmutation=maxmutation;
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
 		minpercentofclasses = ((double)minpercentofclassesp)/100;
@@ -94,8 +100,10 @@ public class Schedule extends Solution  {
 		}
 		return out;
 	}
+	
 	@Override
 	public Solution cross(Solution sollution) {
+		
 		Random generator = new Random();
 		Solution newsollution = new Schedule(this);
 		Schedule currentsollution;
@@ -276,7 +284,7 @@ public class Schedule extends Solution  {
 	public Solution mutate() {
 		// TODO Auto-generated method stub
 		Random generator = new Random();
-		int nbofmutation = generator.nextInt(maxnbofmutation);
+		int nbofmutation = generator.nextInt((int)Math.ceil(maxnbofmutation*this.studentclassprojection.size()/100));
 		nbofmutation = nbofmutation > this.studentclassprojection.size() ? this.studentclassprojection.size() : nbofmutation;
 		for (int i =0;i<nbofmutation;i++) {
 			int studentid = generator.nextInt(this.getStudents().size());
