@@ -104,7 +104,7 @@ public class Schedule extends Solution  {
 				int countstudentreq=newproj.students.requiredClasses.length;
 				if(countstudentreq>currentclasses) {
 					//newproj.students=currentprojection.get(countprojection).students;
-					newprojection.add(newproj);
+					newprojection.add(new StudentClassProjection(newproj));
 					//countprojection2++;
 				} else if (countstudentreq<currentclasses) {
 					//if(countprojection<newprojection.size())
@@ -112,7 +112,7 @@ public class Schedule extends Solution  {
 					countprojection2--;
 				} else{
 					//if(countprojection<newprojection.size())
-					newprojection.set(countprojection2, newproj);
+					newprojection.set(countprojection2, new StudentClassProjection(newproj));
 				}
 			} 
 			countprojection++;
