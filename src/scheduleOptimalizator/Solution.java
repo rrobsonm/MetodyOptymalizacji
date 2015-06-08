@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.opencsv.CSVWriter;
 
 public abstract class Solution implements Comparable<Solution> {
-	static public class StudentClassProjection {
+	static public class StudentClassProjection implements Cloneable {
 		public int id;
 		public Student students;
 		public Class classes;

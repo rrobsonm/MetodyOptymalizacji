@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.*;
 
-public class Schedule extends Solution {
+public class Schedule extends Solution  {
 
 	//Tutaj bym zrobi³ jakies odwzorowanie studentów na zajêcia. Jakaœ macie¿ idStudenta x przedmioty.
 	//List<Student> students;
@@ -23,7 +23,7 @@ public class Schedule extends Solution {
 	
 	
 
-	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
+	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp)  {
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
 		minpercentofclasses = ((double)minpercentofclassesp)/100;
@@ -122,21 +122,28 @@ public class Schedule extends Solution {
 			i=currentsollution.getStudents().size();
 			i=currentsollution.getStudents().size();
 		}
+		if(othersollution.getStudents().size()!=4) {
+			int i = 0;
+
+			i=currentsollution.getStudents().size();
+			i=currentsollution.getStudents().size();
+		}
 		for(Student student : currentsollution.getStudents()) {
-			if(changestudentfromplace>countprojection) {
-				List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
-				if(new2.size()>0) {
+			//if(changestudentfromplace>countprojection) {
+			//	List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
+			//	if(new2.size()>0) {
 					//newprojection.removeIf(x -> x.students.getId() == student.getId());
 					//newprojection.addAll(new2);
-				}
+			//	}
 				//for(StudentClassProjection projection : currentsollution.getClassesForStudent(student.getId())) {
 				//	
 				//}
-			}
+			//}
 			countprojection++;
 			int currentclasses=othersollution.countStudentClasses(student.getId());
 			int countstudentreq=student.requiredClasses.length;
 			StudentClassProjection newproj=othersollution.studentclassprojection.get((new Random()).nextInt(othersollution.studentclassprojection.size()));
+			
 			newproj.students=student;
 			if(countstudentreq>currentclasses) {
 				//newproj.students=currentprojection.get(countprojection).students;
@@ -147,6 +154,18 @@ public class Schedule extends Solution {
 			//	newprojection.remove(newprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0));
 				//countprojection2--;
 			}
+		}
+		if(currentsollution.getStudents().size()!=4) {
+			int i = 0;
+
+			i=currentsollution.getStudents().size();
+			i=currentsollution.getStudents().size();
+		}
+		if(othersollution.getStudents().size()!=4) {
+			int i = 0;
+
+			i=currentsollution.getStudents().size();
+			i=currentsollution.getStudents().size();
 		}
 		newsollution.studentclassprojection=newprojection2;
 
