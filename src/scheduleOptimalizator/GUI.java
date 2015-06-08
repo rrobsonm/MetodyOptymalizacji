@@ -59,7 +59,7 @@ public class GUI extends JFrame {
 		horizontalBox_6.add(lblClassOverload);
 		
 		textFieldOverloadClass = new JTextField();
-		textFieldOverloadClass.setText("50");
+		
 		textFieldOverloadClass.setColumns(2);
 		horizontalBox_6.add(textFieldOverloadClass);
 		
@@ -70,7 +70,7 @@ public class GUI extends JFrame {
 		horizontalBox_3.add(labelTarget_penalty_absent);
 		
 		textFieldTarget_Penalty_absend = new JTextField();
-		textFieldTarget_Penalty_absend.setText("100");
+		
 		textFieldTarget_Penalty_absend.setColumns(2);
 		horizontalBox_3.add(textFieldTarget_Penalty_absend);
 		
@@ -81,7 +81,7 @@ public class GUI extends JFrame {
 		horizontalBox_4.add(lblTargetpenaltyclashes);
 		
 		textFieldTarget_Penalty_clashes = new JTextField();
-		textFieldTarget_Penalty_clashes.setText("10");
+		
 		textFieldTarget_Penalty_clashes.setColumns(2);
 		horizontalBox_4.add(textFieldTarget_Penalty_clashes);
 		
@@ -92,7 +92,7 @@ public class GUI extends JFrame {
 		horizontalBox_5.add(lblAddBusytime);
 		
 		textFieldAddBusytime = new JTextField();
-		textFieldAddBusytime.setText("50");
+		
 		textFieldAddBusytime.setColumns(2);
 		horizontalBox_5.add(textFieldAddBusytime);
 		
@@ -194,7 +194,7 @@ public class GUI extends JFrame {
 		horizontalBox_7.add(lblStudentexchangenb);
 		
 		textFieldstudentexchangenb = new JTextField();
-		textFieldstudentexchangenb.setText("50");
+		
 		textFieldstudentexchangenb.setColumns(2);
 		horizontalBox_7.add(textFieldstudentexchangenb);
 		
@@ -205,7 +205,7 @@ public class GUI extends JFrame {
 		horizontalBox_8.add(lblInterstudentchange);
 		
 		textFieldinterstudentchange = new JTextField();
-		textFieldinterstudentchange.setText("100");
+		
 		textFieldinterstudentchange.setColumns(2);
 		horizontalBox_8.add(textFieldinterstudentchange);
 		
@@ -222,7 +222,7 @@ public class GUI extends JFrame {
 		horizontalBox_9.add(lblMaxnumofmutations);
 		
 		textFieldmaxnumofmutations = new JTextField();
-		textFieldmaxnumofmutations.setText("50");
+		
 		textFieldmaxnumofmutations.setColumns(2);
 		horizontalBox_9.add(textFieldmaxnumofmutations);
 		
@@ -364,10 +364,17 @@ public class GUI extends JFrame {
 		textFieldOutputPath.setText("C:\\Users\\Adam Lach\\Desktop\\ftp");
 		textFieldPopulationSize.setText("1000");
 		textFieldPopulationElite.setText("10");
-		textFieldCrossLevel.setText("50");
-		textFieldMutationLevel.setText("50");
-		textFieldMaxIterations.setText("200");
-		textFieldminpercentofclasses.setText("50");
-		textFieldclassesfilledfactor.setText("60");
+		textFieldCrossLevel.setText("80");
+		textFieldMutationLevel.setText("80");
+		textFieldMaxIterations.setText("400");
+		textFieldminpercentofclasses.setText("40");
+		textFieldclassesfilledfactor.setText("80");
+		textFieldmaxnumofmutations.setText("2");
+		textFieldOverloadClass.setText("50");
+		textFieldTarget_Penalty_absend.setText("5000");
+		textFieldTarget_Penalty_clashes.setText("500000");
+		textFieldAddBusytime.setText("2");
+		textFieldstudentexchangenb.setText("50");
+		textFieldinterstudentchange.setText("50");
 	}
 }
