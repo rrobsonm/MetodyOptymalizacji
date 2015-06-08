@@ -18,10 +18,6 @@ public class ProgramStarter implements Runnable {
 	int interstudentchange;
 	int maxnbofmutation;
 	
-
-
-	
-
 	public ProgramStarter(String classesPath, String studentsPath,
 			String outputPath, int size, int elite, int mutationLevel,
 			int crossLevel, int maxIterations, int minpercentofclasses,
@@ -60,7 +56,14 @@ public class ProgramStarter implements Runnable {
 
 			List<Solution> solutions = new ArrayList<Solution>();
 			for(int i = 0; i < size; i++){
-				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor));
+				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, 
+						classesfilledfactor, 
+						target_penalty_absent,
+						target_penalty_clashes,
+						target_add_busytime,
+						interstudentchange,
+						studentexchangenb,
+						maxnbofmutation));
 			}
 			
 			Population population = new Population(elite, solutions, crossLevel, mutationLevel, dataLayer);
