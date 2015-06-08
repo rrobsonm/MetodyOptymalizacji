@@ -17,6 +17,10 @@ public class Schedule extends Solution {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
+	private int target_penalty_absent=100;
+	private int target_penalty_clashes=20;
+	private int target_add_busytime=25000;
+	
 	
 
 	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp) {
@@ -28,7 +32,7 @@ public class Schedule extends Solution {
 			Random generator = new Random();
 			int nbofrequiredclasses = student.requiredClasses.length;
 			int nbofminclasses = (int)Math.ceil(nbofrequiredclasses*minpercentofclasses);
-			int randomnbofclasses=(int) (nbofminclasses*(classesfilledfactor)+ ((nbofrequiredclasses-nbofminclasses) > 0 ? generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)) : 0));
+			int randomnbofclasses=(int) (nbofminclasses*(classesfilledfactor)+ ((nbofrequiredclasses-nbofminclasses) > 0 ? generator.nextInt((int)Math.ceil(2*(nbofrequiredclasses-nbofminclasses)*classesfilledfactor)) : 1));
 			int nbofclasses = randomnbofclasses > nbofrequiredclasses ? nbofrequiredclasses :randomnbofclasses;
 			shuffleArray(student.requiredClasses);
 			for (int C=0; C<nbofclasses;C++) {
@@ -40,6 +44,12 @@ public class Schedule extends Solution {
 				StudentClassProjection classprojection = new StudentClassProjection(student, tmpclass.get(generator.nextInt(tmpclass.size())));
 				schedule.studentclassprojection.add(classprojection);
 			}
+			
+			
+		}
+		if(schedule.getStudents().size()!=4) {
+			int i = 0;
+			i=1;
 		}
 		return schedule;
 	}
@@ -52,35 +62,99 @@ public class Schedule extends Solution {
 		List<StudentClassProjection> currentprojection;
 		List<StudentClassProjection> otherprojection;
 
-		List<StudentClassProjection> newprojection = new ArrayList<Solution.StudentClassProjection>();
+		//List<StudentClassProjection> newprojection = new ArrayList<Solution.StudentClassProjection>();
+
+		Schedule currentsollution;
+		Schedule othersollution;
 		if(minnbofprojection==1) {
 			currentprojection=this.studentclassprojection;
 			otherprojection=sollution.studentclassprojection;
+			currentsollution=this;
+			othersollution=(Schedule) sollution;
 		} else {
 			currentprojection=sollution.studentclassprojection;
 			otherprojection=this.studentclassprojection;
+			currentsollution=(Schedule) sollution;
+			othersollution=this;
 		}
-		int changestudentfromplace=0;
+		/*int changestudentfromplace=0;
 		if(currentprojection.size()>0) {
-		changestudentfromplace = generator.nextInt(currentprojection.size());
-		}
+			changestudentfromplace = generator.nextInt(currentprojection.size());
+		}*/
 		int countprojection=0;
+		int countprojection2=0;
 		//Collections.shuffle(currentprojection);
-		for(StudentClassProjection projection : currentprojection) {
+		//Collections.shuffle(otherprojection);
+		
+		List<StudentClassProjection> newprojection = new ArrayList<StudentClassProjection>(currentprojection);
+		List<StudentClassProjection> newprojection2 = new ArrayList<StudentClassProjection>(currentprojection);
+		/*for(StudentClassProjection projection : currentprojection) {
 			if(changestudentfromplace>countprojection) {
 				StudentClassProjection newproj = otherprojection.get(countprojection);
-				newproj.students=currentprojection.get(countprojection).students;
-				if(generator.nextInt(1)==1) {
-					currentprojection.set(countprojection, newproj);
-				} else {
+				//newproj.students=currentprojection.get(countprojection).students;
+				int randomnb =generator.nextInt(2);
+				int currentclasses=currentsollution.countStudentClasses(newproj.students.getId());
+				int countstudentreq=newproj.students.requiredClasses.length;
+				if(countstudentreq>currentclasses) {
+					//newproj.students=currentprojection.get(countprojection).students;
 					newprojection.add(newproj);
+					//countprojection2++;
+				} else if (countstudentreq<currentclasses) {
+					//if(countprojection<newprojection.size())
+					newprojection.remove(countprojection2);
+					countprojection2--;
+				} else{
+					//if(countprojection<newprojection.size())
+					newprojection.set(countprojection2, newproj);
 				}
 			} 
 			countprojection++;
+			countprojection2++;
 		}
-		newsollution.studentclassprojection=currentprojection;
-		newsollution.studentclassprojection.addAll(newprojection);
-		
+		*/
+		int changestudentfromplace=0;
+		if(currentprojection.size()>0) {
+			changestudentfromplace = generator.nextInt(currentsollution.getStudents().size());
+		}
+		if(currentsollution.getStudents().size()!=4) {
+			int i = 0;
+
+			i=currentsollution.getStudents().size();
+			i=currentsollution.getStudents().size();
+		}
+		for(Student student : currentsollution.getStudents()) {
+			if(changestudentfromplace>countprojection) {
+				List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
+				if(new2.size()>0) {
+					//newprojection.removeIf(x -> x.students.getId() == student.getId());
+					//newprojection.addAll(new2);
+				}
+				//for(StudentClassProjection projection : currentsollution.getClassesForStudent(student.getId())) {
+				//	
+				//}
+			}
+			countprojection++;
+			int currentclasses=othersollution.countStudentClasses(student.getId());
+			int countstudentreq=student.requiredClasses.length;
+			StudentClassProjection newproj=othersollution.studentclassprojection.get((new Random()).nextInt(othersollution.studentclassprojection.size()));
+			newproj.students=student;
+			if(countstudentreq>currentclasses) {
+				//newproj.students=currentprojection.get(countprojection).students;
+				newprojection.add(newproj);
+				//countprojection2++;
+			} else if (countstudentreq<currentclasses) {
+				//if(countprojection<newprojection.size())
+			//	newprojection.remove(newprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0));
+				//countprojection2--;
+			}
+		}
+		newsollution.studentclassprojection=newprojection2;
+
+		//newsollution.studentclassprojection.addAll(newprojection);
+		if(newsollution.getStudents().size()!=4) {
+			int i =0;
+			i=newsollution.getStudents().size();
+		}
 		return newsollution;
 	}
 
@@ -91,7 +165,7 @@ public class Schedule extends Solution {
 		int nbofmutation = generator.nextInt(maxnbofmutation);
 		nbofmutation = nbofmutation > this.studentclassprojection.size() ? this.studentclassprojection.size() : nbofmutation;
 		for (int i =0;i<nbofmutation;i++) {
-			this.studentclassprojection.add(this.studentclassprojection.get(generator.nextInt(this.studentclassprojection.size())));
+	//		this.studentclassprojection.add(this.studentclassprojection.get(generator.nextInt(this.studentclassprojection.size())));
 		}
 		return this;
 	}
@@ -119,9 +193,9 @@ public class Schedule extends Solution {
 		int allstudentsrating = 0;
 		int allclashes=0;
 		int allabsent=0;
-		for (StudentClassProjection projection : studentclassprojection) {
-			ArrayList<Student> studentsinprojection = new ArrayList<Student>();
-			studentsinprojection = this.getStudents();
+		//for (StudentClassProjection projection : studentclassprojection) {
+		ArrayList<Student> studentsinprojection = new ArrayList<Student>();
+		studentsinprojection = this.getStudents();
 			
 			for( Student student : studentsinprojection) {
 				int[][] slots;
@@ -136,11 +210,11 @@ public class Schedule extends Solution {
 					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
-				allstudentsrating+=(int)Math.floor(10000/student.busyTime-10*student.clashes-10*student.absent);
+				allstudentsrating+=(int)Math.floor(target_add_busytime/(double)student.busyTime-target_penalty_clashes*(double)student.clashes-target_penalty_absent*(double)student.absent);
 				allclashes+=student.clashes;
-				allabsent=student.absent;
+				allabsent+=student.absent;
 			}
-		}
+		//}
 		this.rating=allstudentsrating;
 		this.absentstudents=allabsent;
 		this.clashes=allclashes;
