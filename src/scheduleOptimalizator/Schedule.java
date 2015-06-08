@@ -292,7 +292,7 @@ public class Schedule extends Solution  {
 				//countprojection2++;
 			} else if (countstudentreq<currentclasses) {
 				
-				StudentClassProjection toremove =  this.studentclassprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0);
+				StudentClassProjection toremove =  this.studentclassprojection.stream().filter(x -> x.students.getId()==studentid).collect(Collectors.toList()).get(0);
 				if(this.getClassesForStudent(toremove.students.getId()).size()>1) {
 					this.studentclassprojection.remove(toremove);
 				}
