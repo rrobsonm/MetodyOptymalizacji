@@ -1,4 +1,6 @@
 Do przetestowania pakiety:
-* student_easy & classes_easy
-* student_long & classes_easy
-* ... (w trakcie)
+* students_easy & classes_easy
+* students_long & classes_easy
+* students_normal & classes_normal
+* students_long & classes_easy
+* students_long & classes_long
