@@ -34,6 +34,10 @@ public class GUI extends JFrame {
 	private JTextField textFieldTarget_Penalty_absend;
 	private JTextField textFieldTarget_Penalty_clashes;
 	private JTextField textFieldAddBusytime;
+	private JTextField textFieldOverloadClass;
+	private JTextField textFieldstudentexchangenb;
+	private JTextField textFieldinterstudentchange;
+	private JTextField textFieldmaxnumofmutations;
 	
 	GUI(){
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -47,6 +51,17 @@ public class GUI extends JFrame {
 		
 		JLabel labelTargetParameters = new JLabel("Target fun. params");
 		verticalBoxTargetParamters.add(labelTargetParameters);
+		
+		Box horizontalBox_6 = Box.createHorizontalBox();
+		verticalBoxTargetParamters.add(horizontalBox_6);
+		
+		JLabel lblClassOverload = new JLabel("Class Overload");
+		horizontalBox_6.add(lblClassOverload);
+		
+		textFieldOverloadClass = new JTextField();
+		textFieldOverloadClass.setText("50");
+		textFieldOverloadClass.setColumns(2);
+		horizontalBox_6.add(textFieldOverloadClass);
 		
 		Box horizontalBox_3 = Box.createHorizontalBox();
 		verticalBoxTargetParamters.add(horizontalBox_3);
@@ -166,6 +181,51 @@ public class GUI extends JFrame {
 		verticalBoxPopulationParameters.add(horizontalBox);
 		panelParameters.add(verticalBoxPopulationParameters);
 		
+		Box verticalBox = Box.createVerticalBox();
+		panelParameters.add(verticalBox);
+		
+		JLabel lblCrossParams = new JLabel("Cross params");
+		verticalBox.add(lblCrossParams);
+		
+		Box horizontalBox_7 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_7);
+		
+		JLabel lblStudentexchangenb = new JLabel("interstudentchange");
+		horizontalBox_7.add(lblStudentexchangenb);
+		
+		textFieldstudentexchangenb = new JTextField();
+		textFieldstudentexchangenb.setText("50");
+		textFieldstudentexchangenb.setColumns(2);
+		horizontalBox_7.add(textFieldstudentexchangenb);
+		
+		Box horizontalBox_8 = Box.createHorizontalBox();
+		verticalBox.add(horizontalBox_8);
+		
+		JLabel lblInterstudentchange = new JLabel("intrastudentchange");
+		horizontalBox_8.add(lblInterstudentchange);
+		
+		textFieldinterstudentchange = new JTextField();
+		textFieldinterstudentchange.setText("100");
+		textFieldinterstudentchange.setColumns(2);
+		horizontalBox_8.add(textFieldinterstudentchange);
+		
+		Box verticalBox_1 = Box.createVerticalBox();
+		panelParameters.add(verticalBox_1);
+		
+		JLabel lblMutationParams = new JLabel("Mutation params");
+		verticalBox_1.add(lblMutationParams);
+		
+		Box horizontalBox_9 = Box.createHorizontalBox();
+		verticalBox_1.add(horizontalBox_9);
+		
+		JLabel lblMaxnumofmutations = new JLabel("maxnumofmutations");
+		horizontalBox_9.add(lblMaxnumofmutations);
+		
+		textFieldmaxnumofmutations = new JTextField();
+		textFieldmaxnumofmutations.setText("50");
+		textFieldmaxnumofmutations.setColumns(2);
+		horizontalBox_9.add(textFieldmaxnumofmutations);
+		
 		JPanel panelPaths = new JPanel();
 		getContentPane().add(panelPaths);
 		panelPaths.setLayout(new CardLayout(0, 0));
@@ -269,6 +329,10 @@ public class GUI extends JFrame {
 		    	  int target_penalty_absent = Integer.parseInt(textFieldTarget_Penalty_absend.getText());
 		    	  int target_penalty_clashes = Integer.parseInt(textFieldTarget_Penalty_clashes.getText());
 		    	  int target_add_busytime = Integer.parseInt(textFieldAddBusytime.getText());
+		    	  int target_overload_classes = Integer.parseInt(textFieldOverloadClass.getText());
+		    	  int studentexchangenb = Integer.parseInt(textFieldstudentexchangenb.getText());
+		    	  int interstudentchange = Integer.parseInt(textFieldinterstudentchange.getText());
+		    	  int maxnbofmutation = Integer.parseInt(textFieldmaxnumofmutations.getText());
 		    	  ProgramStarter programStarter = new ProgramStarter(
 														    		 textFieldClassesPath.getText(), 
 														    		 textFieldStudentsPath.getText(),
@@ -282,7 +346,11 @@ public class GUI extends JFrame {
 														    		 classesfilledfactor,
 														    		 target_penalty_absent,
 														    		 target_penalty_clashes,
-														    		 target_add_busytime);
+														    		 target_add_busytime,
+														    		 target_overload_classes,
+														    		 studentexchangenb,
+														    		 interstudentchange,
+														    		 maxnbofmutation);
 		    	  programStarter.run();
 		      }
 		    });

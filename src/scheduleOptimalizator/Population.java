@@ -166,7 +166,7 @@ public class Population {
 	
 	private void mutatePhase() throws InterruptedException{//losujemy (solutions.size()-elite*size)*crossLevel/100 osobników i mutujemy ich, z wy³¹czeniem elity
 		
-		int numberOfMutations = (solutions.size()-size*elite)*mutationLevel/100;
+		int numberOfMutations = (int) (((size-elite*size/100.0)*mutationLevel)/100);
 	
 		for (int i = 0; i < numberOfMutations; ++i){
 			int index = size*elite + generator.nextInt(solutions.size()-size*elite);
