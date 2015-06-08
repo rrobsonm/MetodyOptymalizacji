@@ -53,8 +53,16 @@ public abstract class Solution implements Comparable<Solution> {
 			set.add(item.students);
 		    }
 		}
+	
 		return result;
 	    }
+	public List<StudentClassProjection> getClassesForStudent(int studentid) {
+		
+		return this.studentclassprojection.stream().filter(x -> x.students.getId() == studentid).collect(Collectors.toList());
+	}
+	public int countStudentClasses(int studentid) {
+		return (int)this.studentclassprojection.stream().filter(x -> x.students.getId() == studentid).count();
+		}
 	public List<StudentClassProjection> studentclassprojection;
 	public boolean instudentcopy; // kopiowanie zajec w obrebie studenta
 	public boolean intertypecopy; // krzyzowanie zajec o roznych typach
