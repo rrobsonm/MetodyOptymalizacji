@@ -88,21 +88,8 @@ public class Population {
 		for (int i = 0; i < pairs; ++i){
 			Solution A = solutions.get(generator.nextInt(size));
 			Solution B = solutions.get(generator.nextInt(size));
-			if(A.getStudents().size()!=B.getStudents().size()){
-				
-				int size = A.getStudents().size();
-				int sizeB = B.getStudents().size();
-				
-				
-			}
+			
 			Solution tmp = A.cross(B);
-			if(A.getStudents().size()!=B.getStudents().size()){
-				
-				int size = A.getStudents().size();
-				int sizeB = B.getStudents().size();
-				
-				
-			}
 			tmp.updateValues();
 			childs.add(tmp);
 		}

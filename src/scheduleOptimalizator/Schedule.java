@@ -32,7 +32,8 @@ public class Schedule extends Solution  {
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
 		minpercentofclasses = ((double)minpercentofclassesp)/100;
-		schedule.studentclassprojection = new ArrayList<StudentClassProjection>();
+		//student.size() x classes.size()
+		schedule.studentclassprojection = new ArrayList<StudentClassProjection>(students.size()*classes.size());
 		for (Student student : students) {
 			Random generator = new Random();
 			int nbofrequiredclasses = student.requiredClasses.length;
@@ -135,12 +136,12 @@ public class Schedule extends Solution  {
 			i=currentsollution.getStudents().size();
 		}
 		for(Student student : currentsollution.getStudents()) {
-			//if(changestudentfromplace>countprojection) {
-			//	List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
-			//	if(new2.size()>0) {
-					//newprojection.removeIf(x -> x.students.getId() == student.getId());
-					//newprojection.addAll(new2);
-			//	}
+			if(changestudentfromplace>countprojection) {
+				List<StudentClassProjection> new2 = othersollution.getClassesForStudent(student.getId());
+				if(new2.size()>0) {
+					newprojection.removeIf(x -> x.students.getId() == student.getId());
+					newprojection.addAll(new2);
+				}
 				//for(StudentClassProjection projection : currentsollution.getClassesForStudent(student.getId())) {
 				//	
 				//}
@@ -173,9 +174,8 @@ public class Schedule extends Solution  {
 			i=currentsollution.getStudents().size();
 			i=currentsollution.getStudents().size();
 		}
-		newsollution.studentclassprojection=newprojection2;
+		newsollution.studentclassprojection=newprojection;
 
-		//newsollution.studentclassprojection.addAll(newprojection);
 		if(newsollution.getStudents().size()!=4) {
 			int i =0;
 			i=newsollution.getStudents().size();
