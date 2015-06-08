@@ -62,6 +62,37 @@ public class Schedule extends Solution  {
 	}
 
 	@Override
+	public Solution cross2(Solution sollution) {
+		Random generator = new Random();
+		Solution newsollution = (Solution) this.clone();
+		Schedule currentsollution;
+		Schedule othersollution;
+		if(generator.nextInt(1)==1) {
+			currentsollution=this;
+			othersollution=(Schedule)sollution;
+		} else {
+			currentsollution=(Schedule)sollution;
+			othersollution=this;
+		}
+
+		//List<StudentClassProjection> newprojection = new ArrayList<StudentClassProjection>(currentsollution.studentclassprojection);
+		
+		for(Student student : currentsollution.getStudents()) {
+			//int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
+				for(int i=0;i<Math.ceil(currentsollution.getClassesForStudent(student.getId()).size()*interstudentchange/100);i++) {
+					Class otherclass = othersollution.getClassesForStudent(student.getId()).get(generator.nextInt(othersollution.countStudentClasses(student.getId()))).classes;
+					StudentClassProjection newinterstudentprojection = new StudentClassProjection(student, otherclass);
+					
+					newsollution.getClassesForStudent(student.getId()).get(generator.nextInt(newsollution.countStudentClasses(student.getId())));
+				}
+			
+		}
+		
+		
+		return newsollution;
+	}
+	
+	/*@Override
 	public Solution cross(Solution sollution) {
 		Random generator = new Random();
 		Solution newsollution = new scheduleOptimalizator.Schedule();
@@ -87,7 +118,7 @@ public class Schedule extends Solution  {
 		int changestudentfromplace=0;
 		if(currentprojection.size()>0) {
 			changestudentfromplace = generator.nextInt(currentprojection.size());
-		}/**/
+		}
 		int countprojection=0;
 		int countprojection2=0;
 		Collections.shuffle(currentprojection);
@@ -110,7 +141,7 @@ public class Schedule extends Solution  {
 					//if(countprojection<newprojection.size())
 					newprojection.remove(countprojection2);
 					countprojection2--;
-				} else{
+				} else if (currentclasses>0){
 					//if(countprojection<newprojection.size())
 					newprojection.set(countprojection2, new StudentClassProjection(newproj));
 				}
@@ -155,13 +186,13 @@ public class Schedule extends Solution  {
 				newprojection.remove(newprojection.stream().filter(x -> x.students.getId()==student.getId()).collect(Collectors.toList()).get(0));
 				//countprojection2--;
 			}
-		}*/
+		}
 		newsollution.studentclassprojection=newprojection;
 
 		
 		return newsollution;
 	}
-
+*/
 	@Override
 	public Solution mutate() {
 		// TODO Auto-generated method stub
