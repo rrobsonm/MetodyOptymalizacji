@@ -89,7 +89,19 @@ public class Population {
 			Solution A = solutions.get(generator.nextInt(size));
 			Solution B = solutions.get(generator.nextInt(size));
 			
+			if(A.getStudents().size() != B.getStudents().size()){
+				System.out.println("break");
+			}
 			Solution tmp = A.cross(B);
+			if(A.getStudents().size() != tmp.getStudents().size()){
+				System.out.println("break1");
+			}
+			if(B.getStudents().size() != tmp.getStudents().size()){
+				System.out.println("break3");
+			}
+			if(A.getStudents().size() != B.getStudents().size()){
+				System.out.println("break2");
+			}
 			tmp.updateValues();
 			childs.add(tmp);
 		}
