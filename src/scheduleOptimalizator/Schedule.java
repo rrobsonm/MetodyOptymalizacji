@@ -19,8 +19,8 @@ public class Schedule extends Solution  {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
-	private int target_penalty_absent=50000;
-	private int target_penalty_clashes=5000;
+	private int target_penalty_absent=5000;
+	private int target_penalty_clashes=50000;
 	private int target_add_busytime=5;
 	private int interstudentchange=50;
 	private int studentexchangenb=50;

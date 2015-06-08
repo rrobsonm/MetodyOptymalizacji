@@ -55,7 +55,7 @@ public class Population {
 	}
 	
 	public void evolve() throws InterruptedException{	
-		crossingPhase();
+		crossingPhaseOneThread();
 		mutatePhase();
 		replacmentPhase();
 		log();
