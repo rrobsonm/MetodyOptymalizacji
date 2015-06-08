@@ -29,6 +29,23 @@ public class Schedule extends Solution  {
 	
 	
 
+	public Schedule(Schedule schedule) {
+		minpercentofclasses = schedule.minpercentofclasses;
+		classesfilledfactor = schedule.classesfilledfactor;
+		rating = schedule.rating;
+		absentstudents = schedule.absentstudents;
+		clashes = schedule.clashes;
+		target_penalty_absent = schedule.target_penalty_absent;
+		target_penalty_clashes = schedule.target_penalty_clashes;
+		target_add_busytime = schedule.target_add_busytime;
+		studentclassprojection = schedule.studentclassprojection;
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Schedule() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp)  {
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
@@ -62,9 +79,9 @@ public class Schedule extends Solution  {
 	}
 
 	@Override
-	public Solution cross2(Solution sollution) {
+	public Solution cross(Solution sollution) {
 		Random generator = new Random();
-		Solution newsollution = (Solution) this.clone();
+		Solution newsollution = new Schedule(this);
 		Schedule currentsollution;
 		Schedule othersollution;
 		if(generator.nextInt(1)==1) {
