@@ -145,7 +145,7 @@ public class Schedule extends Solution  {
 				//for(StudentClassProjection projection : currentsollution.getClassesForStudent(student.getId())) {
 				//	
 				//}
-			//}
+			}
 			countprojection++;
 			int currentclasses=othersollution.countStudentClasses(student.getId());
 			int countstudentreq=student.requiredClasses.length;
