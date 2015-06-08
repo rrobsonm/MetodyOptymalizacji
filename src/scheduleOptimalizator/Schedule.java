@@ -96,11 +96,17 @@ public class Schedule extends Solution  {
 		//List<StudentClassProjection> newprojection = new ArrayList<StudentClassProjection>(currentsollution.studentclassprojection);
 		
 		for(Student student : currentsollution.getStudents()) {
-			if(generator.nextInt((int)Math.ceil(studentexchangenb*newsollution.getStudents().size()/100))==0) {
+			int randsol =(int)Math.ceil(studentexchangenb*newsollution.getStudents().size()/100);
+			randsol = randsol>0 ? randsol : 1;
+			if(generator.nextInt(randsol)==0) {
 				
 			//int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
 				for(int i=0;i<Math.ceil(currentsollution.getClassesForStudent(student.getId()).size()*interstudentchange/100);i++) {
-					Class otherclass = othersollution.getClassesForStudent(student.getId()).get(generator.nextInt(othersollution.countStudentClasses(student.getId()))).classes;
+					int classesid = othersollution.countStudentClasses(student.getId());
+					if(classesid ==0) {
+						int i =1;
+					}
+					Class otherclass = othersollution.getClassesForStudent(student.getId()).get(generator.nextInt(classesid)).classes;
 					StudentClassProjection newinterstudentprojection = new StudentClassProjection(student, otherclass);
 					
 					newsollution.getClassesForStudent(student.getId()).get(generator.nextInt(newsollution.countStudentClasses(student.getId())));
