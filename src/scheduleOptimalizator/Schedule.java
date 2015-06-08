@@ -279,7 +279,25 @@ public class Schedule extends Solution  {
 		int nbofmutation = generator.nextInt(maxnbofmutation);
 		nbofmutation = nbofmutation > this.studentclassprojection.size() ? this.studentclassprojection.size() : nbofmutation;
 		for (int i =0;i<nbofmutation;i++) {
+			int studentid = generator.nextInt(this.getStudents().size());
 	//		this.studentclassprojection.add(this.studentclassprojection.get(generator.nextInt(this.studentclassprojection.size())));
+			int currentclasses=this.countStudentClasses(studentid);
+			int countstudentreq=this.getStudents().get(studentid).requiredClasses.length;
+			StudentClassProjection newproj=new StudentClassProjection(this.studentclassprojection.get((new Random()).nextInt(this.studentclassprojection.size())));
+			
+			newproj.students=this.getStudents().get(studentid);
+			if(countstudentreq>currentclasses) {
+				//newproj.students=currentprojection.get(countprojection).students;
+				this.studentclassprojection.add(newproj);
+				//countprojection2++;
+			} else if (countstudentreq<currentclasses) {
+				
+				StudentClassProjection toremove =  this.studentclassprojection.stream().filter(x -> x.students.getId()==studentid).collect(Collectors.toList()).get(0);
+				if(this.getClassesForStudent(toremove.students.getId()).size()>1) {
+					this.studentclassprojection.remove(toremove);
+				}
+				//countprojection2--;
+			}
 		}
 		return this;
 	}
