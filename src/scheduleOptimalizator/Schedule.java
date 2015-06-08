@@ -44,13 +44,14 @@ public class Schedule extends Solution  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp, int penaltyabsent, int penaltyclashes, int addbusytime, int interstudentchanges, int studentexchanges, int maxmutation)  {
+	public static Schedule generate(ArrayList<Student> students, ArrayList<Class> classes,int minpercentofclassesp, int classesfilledfactorp, int penaltyabsent, int penaltyclashes, int addbusytime, int interstudentchanges, int studentexchanges, int maxmutation, int targetov)  {
 		target_penalty_absent=penaltyabsent;
 		target_penalty_clashes=penaltyclashes;
 		target_add_busytime=addbusytime;
 		interstudentchange=interstudentchanges;
 		studentexchangenb=studentexchanges;
 		maxnbofmutation=maxmutation;
+		
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
 		minpercentofclasses = ((double)minpercentofclassesp)/100;
