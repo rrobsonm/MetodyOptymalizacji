@@ -55,7 +55,7 @@ public class Population {
 	}
 	
 	public void evolve() throws InterruptedException{	
-		crossingPhase();
+		crossingPhaseOneThread();
 		mutatePhase();
 		replacmentPhase();
 		log();
@@ -78,6 +78,20 @@ public class Population {
 		}
 		
 	}
+	
+	private void crossingPhaseOneThread() throws InterruptedException{
+		
+		int pairs = (int) (((size-elite*size/100.0)*crossLevel)/100);
+		
+		List<Solution> childs = new ArrayList<Solution>(pairs);
+		
+		for (int i = 0; i < pairs; ++i){
+			Solution tmp = solutions.get(generator.nextInt(size)).cross(solutions.get(generator.nextInt(size)));
+			tmp.updateValues();
+			childs.add(tmp);
+		}
+		solutions.addAll(childs);
+	}
 
 	private void crossingPhase() throws InterruptedException{//losujemy (size-elite*size)*crossLevel/100 par i tworzymy tyle dzieci. Ka¿de dziecko dodawane jest na koniec solutions
 		
@@ -87,17 +101,14 @@ public class Population {
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS - 1; ++i){
 			cp[i]=new CrossingPhase(pairs/NUMBER_OF_THREADS);
-			cp[i].run();
-			//TESTtesttestasdasd
-			
+			cp[i].run();			
 		}
 		cp[NUMBER_OF_THREADS - 1] = new CrossingPhase(pairs/NUMBER_OF_THREADS+pairs%NUMBER_OF_THREADS);
 		cp[NUMBER_OF_THREADS - 1].run();
 		
 		for(int i =0 ; i < NUMBER_OF_THREADS; ++i){
 			while(cp[i].ended==false){};	
-			
-			//test		
+	
 		}
 		for(int i =0 ; i < NUMBER_OF_THREADS; ++i){
 			solutions.addAll(cp[i].getChilds());
