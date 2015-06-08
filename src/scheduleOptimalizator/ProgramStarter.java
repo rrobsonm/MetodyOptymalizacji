@@ -73,7 +73,7 @@ public class ProgramStarter implements Runnable {
 
 			List<Solution> solutions = new ArrayList<Solution>();
 			for(int i = 0; i < size; i++){
-				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor, target_penalty_absent, target_penalty_clashes, target_add_busytime));
+				solutions.add(Schedule.generate(dataLayer.getStudentsList(), (dataLayer.getClassList()), minpercentofclasses, classesfilledfactor));
 			}
 			
 			Population population = new Population(elite, solutions, crossLevel, mutationLevel, dataLayer);
