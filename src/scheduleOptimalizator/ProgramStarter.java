@@ -13,15 +13,22 @@ public class ProgramStarter implements Runnable {
 	int target_penalty_absent;
 	int target_penalty_clashes;
 	int target_add_busytime;
+	int target_overload_classes;
+	int studentexchangenb;
+	int interstudentchange;
+	int maxnbofmutation;
 	
+
+
 	
-	
-	
+
 	public ProgramStarter(String classesPath, String studentsPath,
 			String outputPath, int size, int elite, int mutationLevel,
 			int crossLevel, int maxIterations, int minpercentofclasses,
 			int classesfilledfactor, int target_penalty_absent,
-			int target_penalty_clashes, int target_add_busytime) {
+			int target_penalty_clashes, int target_add_busytime,
+			int target_overload_classes, int studentexchangenb,
+			int interstudentchange, int maxnbofmutation) {
 		super();
 		this.classesPath = classesPath;
 		this.studentsPath = studentsPath;
@@ -36,35 +43,15 @@ public class ProgramStarter implements Runnable {
 		this.target_penalty_absent = target_penalty_absent;
 		this.target_penalty_clashes = target_penalty_clashes;
 		this.target_add_busytime = target_add_busytime;
+		this.target_overload_classes = target_overload_classes;
+		this.studentexchangenb = studentexchangenb;
+		this.interstudentchange = interstudentchange;
+		this.maxnbofmutation = maxnbofmutation;
 	}
 
 
 
 
-	/*
-	public ProgramStarter(
-			String classesPath, 
-			String studentsPath, 
-			String outputPath, 
-			int size,
-			int elite, 
-			int mutationLevel, 
-			int crossLevel, 
-			int maxIterations,
-			int minpercentofclasses,
-			int classesfilledfactor) {
-		super();
-		this.classesPath = classesPath;
-		this.studentsPath = studentsPath;
-		this.outputPath = outputPath;
-		this.size = size;
-		this.elite = elite;
-		this.mutationLevel = mutationLevel;
-		this.crossLevel = crossLevel;
-		this.maxIterations = maxIterations;
-		this.minpercentofclasses = minpercentofclasses;
-		this.classesfilledfactor = classesfilledfactor;
-	}*/
 
 	public void run(){
 		try {
