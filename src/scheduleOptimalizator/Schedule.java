@@ -26,6 +26,7 @@ public class Schedule extends Solution  {
 	private int target_penalty_clashes=20;
 	private int target_add_busytime=20000;
 	private int interstudentchange=50;
+	private int studentexchangenb=50;
 	
 	
 
@@ -95,6 +96,8 @@ public class Schedule extends Solution  {
 		//List<StudentClassProjection> newprojection = new ArrayList<StudentClassProjection>(currentsollution.studentclassprojection);
 		
 		for(Student student : currentsollution.getStudents()) {
+			if(generator.nextInt((int)Math.ceil(studentexchangenb*newsollution.getStudents().size()/100))==0) {
+				
 			//int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
 				for(int i=0;i<Math.ceil(currentsollution.getClassesForStudent(student.getId()).size()*interstudentchange/100);i++) {
 					Class otherclass = othersollution.getClassesForStudent(student.getId()).get(generator.nextInt(othersollution.countStudentClasses(student.getId()))).classes;
@@ -102,7 +105,23 @@ public class Schedule extends Solution  {
 					
 					newsollution.getClassesForStudent(student.getId()).get(generator.nextInt(newsollution.countStudentClasses(student.getId())));
 				}
-			
+			}
+		}
+		
+		for(Student student : currentsollution.getStudents()) {
+			int randsol =(int)Math.ceil(studentexchangenb*newsollution.getStudents().size()/100);
+			randsol = randsol>0 ? randsol : 1;
+			if(generator.nextInt(randsol)==0) {
+				
+			int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
+			newsollution.studentclassprojection.removeIf(x -> x.students.getId() == student.getId());
+			List<StudentClassProjection> new2 = new ArrayList<StudentClassProjection>(othersollution.getClassesForStudent(otherstudentid));
+			for(StudentClassProjection proj : new2) {
+				proj.students=student;
+				proj.id=student.getId();
+			}
+			newsollution.studentclassprojection.addAll(new2);
+			}
 		}
 		
 		
