@@ -72,7 +72,7 @@ public abstract class Solution implements Comparable<Solution> {
 	public List<StudentClassProjection> studentclassprojection;
 	public boolean instudentcopy; // kopiowanie zajec w obrebie studenta
 	public boolean intertypecopy; // krzyzowanie zajec o roznych typach
-	public static int maxnbofmutation;
+	public static int maxnbofmutation=8;
 	public Solution() {
 		
 	}
