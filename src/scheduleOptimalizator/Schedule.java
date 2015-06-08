@@ -1,16 +1,13 @@
 package scheduleOptimalizator;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
-
 import java.util.Collections;
-
 import java.util.List;
-
 import java.util.Random;
-
 import java.util.stream.*;
+
+import scheduleOptimalizator.Solution.StudentClassProjection;
 
 public class Schedule extends Solution  {
 
@@ -39,7 +36,7 @@ public class Schedule extends Solution  {
 		target_penalty_absent = schedule.target_penalty_absent;
 		target_penalty_clashes = schedule.target_penalty_clashes;
 		target_add_busytime = schedule.target_add_busytime;
-		studentclassprojection = schedule.studentclassprojection;
+		studentclassprojection = new ArrayList<StudentClassProjection>(schedule.studentclassprojection);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -85,7 +82,7 @@ public class Schedule extends Solution  {
 		Solution newsollution = new Schedule(this);
 		Schedule currentsollution;
 		Schedule othersollution;
-		if(generator.nextInt(1)==1) {
+		if(true) {
 			currentsollution=this;
 			othersollution=(Schedule)sollution;
 		} else {
@@ -120,17 +117,26 @@ public class Schedule extends Solution  {
 			randsol = randsol>0 ? randsol : 1;
 			if(generator.nextInt(randsol)==0) {
 				
-			int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
-			newsollution.studentclassprojection.removeIf(x -> x.students.getId() == student.getId());
-			List<StudentClassProjection> new2 = new ArrayList<StudentClassProjection>(othersollution.getClassesForStudent(otherstudentid));
-			for(StudentClassProjection proj : new2) {
-				proj.students=student;
-				proj.id=student.getId();
-			}
-			if(new2.size()==0) {
-			int b2 =0;
-			}
-			newsollution.studentclassprojection.addAll(new2);
+				int otherstudentid = othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
+				int thisstudentid = student.getId();
+				
+				newsollution.studentclassprojection.removeIf(x -> x.students.getId() == student.getId());
+				
+				List<StudentClassProjection> new2 = new ArrayList<StudentClassProjection>(othersollution.getClassesForStudent(otherstudentid));
+				
+				if(true) {
+					int b2 =0;
+				}
+				
+				for(StudentClassProjection proj : new2) {
+					proj.students=student;
+					proj.id=student.getId();
+				}
+				
+				if(true) {
+					int b2 =0;
+				}
+				newsollution.studentclassprojection.addAll(new2);
 			}
 		}
 		
