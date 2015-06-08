@@ -86,7 +86,12 @@ public class Population {
 		List<Solution> childs = new ArrayList<Solution>(pairs);
 		
 		for (int i = 0; i < pairs; ++i){
-			Solution tmp = solutions.get(generator.nextInt(size)).cross(solutions.get(generator.nextInt(size)));
+			Solution A = solutions.get(generator.nextInt(size));
+			Solution B = solutions.get(generator.nextInt(size));
+			if(){
+				
+			}
+			Solution tmp = A.cross(B);
 			tmp.updateValues();
 			childs.add(tmp);
 		}
