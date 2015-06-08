@@ -169,7 +169,7 @@ public class Population {
 		int numberOfMutations = (int) (((size-elite*size/100.0)*mutationLevel)/100);
 	
 		for (int i = 0; i < numberOfMutations; ++i){
-			int index = size*elite + generator.nextInt(solutions.size()-size*elite);
+			int index = (int) (size*elite/100.0 + generator.nextInt((int) (solutions.size()-size*elite/100.0)));
 			solutions.get(index).mutate();
 			solutions.get(index).updateValues();
 		}		
