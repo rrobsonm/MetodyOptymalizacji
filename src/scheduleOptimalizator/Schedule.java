@@ -19,9 +19,9 @@ public class Schedule extends Solution  {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
-	private int target_penalty_absent=1000;
-	private int target_penalty_clashes=20;
-	private int target_add_busytime=20000;
+	private int target_penalty_absent=50000;
+	private int target_penalty_clashes=5000;
+	private int target_add_busytime=5;
 	private int interstudentchange=50;
 	private int studentexchangenb=50;
 	
@@ -304,7 +304,7 @@ public class Schedule extends Solution  {
 	@Override
 	public void updateValues() {
 		// TODO Auto-generated method stub
-		int allstudentsrating = 0;
+		int allstudentsrating = 100000000;
 		int allclashes=0;
 		int allabsent=0;
 		//for (StudentClassProjection projection : studentclassprojection) {
@@ -324,7 +324,7 @@ public class Schedule extends Solution  {
 					simpleclasses[i]=classesinstudent.get(i).classes.getType();		
 				}
 				student.updateValues(slots, simpleclasses);
-				allstudentsrating+=(int)Math.floor(target_add_busytime/(double)student.busyTime-target_penalty_clashes*(double)student.clashes-target_penalty_absent*(double)student.absent);
+				allstudentsrating+=(int)Math.floor(-target_add_busytime*(double)student.busyTime-target_penalty_clashes*(double)student.clashes-target_penalty_absent*(double)student.absent);
 				allclashes+=student.clashes;
 				allabsent+=student.absent;
 			}

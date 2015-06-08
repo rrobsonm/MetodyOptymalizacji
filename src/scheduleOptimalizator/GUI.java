@@ -291,14 +291,14 @@ public class GUI extends JFrame {
 	}
 
 	private void setDefault(){
-		textFieldClassesPath.setText("C:\\Users\\Adam Lach\\LunaWorkspace\\scheduleOptimalizator\\res\\classes.csv");
-		textFieldStudentsPath.setText("C:\\Users\\Adam Lach\\LunaWorkspace\\scheduleOptimalizator\\res\\students.csv");
-		textFieldOutputPath.setText("C:\\Users\\Adam Lach\\LunaWorkspace\\scheduleOptimalizator\\res\\");
-		textFieldPopulationSize.setText("100");
+		textFieldClassesPath.setText("C:\\Users\\Adam Lach\\Desktop\\ftp\\classes_easy.csv");
+		textFieldStudentsPath.setText("C:\\Users\\Adam Lach\\Desktop\\ftp\\students_easy.csv");
+		textFieldOutputPath.setText("C:\\Users\\Adam Lach\\Desktop\\ftp");
+		textFieldPopulationSize.setText("1000");
 		textFieldPopulationElite.setText("10");
 		textFieldCrossLevel.setText("50");
 		textFieldMutationLevel.setText("50");
-		textFieldMaxIterations.setText("1000");
+		textFieldMaxIterations.setText("200");
 		textFieldminpercentofclasses.setText("50");
 		textFieldclassesfilledfactor.setText("60");
 	}
