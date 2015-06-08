@@ -102,9 +102,10 @@ public class Schedule extends Solution  {
 				
 			//int otherstudentid= othersollution.getStudents().get(generator.nextInt(othersollution.getStudents().size())).getId();
 				for(int i=0;i<Math.ceil(currentsollution.getClassesForStudent(student.getId()).size()*interstudentchange/100);i++) {
-					int classesid = othersollution.countStudentClasses(student.getId());
+					int classesid = othersollution.getClassesForStudent(student.getId()).size();
 					if(classesid ==0) {
-						int i =1;
+						
+						int i2 =1;
 					}
 					Class otherclass = othersollution.getClassesForStudent(student.getId()).get(generator.nextInt(classesid)).classes;
 					StudentClassProjection newinterstudentprojection = new StudentClassProjection(student, otherclass);
@@ -125,6 +126,9 @@ public class Schedule extends Solution  {
 			for(StudentClassProjection proj : new2) {
 				proj.students=student;
 				proj.id=student.getId();
+			}
+			if(new2.size()==0) {
+			int b2 =0;
 			}
 			newsollution.studentclassprojection.addAll(new2);
 			}
