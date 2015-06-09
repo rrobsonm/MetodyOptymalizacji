@@ -62,6 +62,22 @@ public abstract class Solution implements Comparable<Solution> {
 	
 		return result;
 	    }
+	public ArrayList<Class> getClasses() {
+		// Remove Duplicates: place them in new list (see above example).
+		ArrayList<Class> result = new ArrayList<>();
+		HashSet<Class> set = new HashSet<>();
+		for (StudentClassProjection item : this.studentclassprojection ) {
+		    if (!set.contains(item.classes)) {
+			result.add(item.classes);
+			set.add(item.classes);
+		    }
+		}
+	
+		return result;
+	    }
+	public int countStudentsForClasses(int classid) {
+		return (int)this.studentclassprojection.stream().filter(x -> x.classes.getType() == classid).count();
+	}
 	public List<StudentClassProjection> getClassesForStudent(int studentid) {
 		
 		return this.studentclassprojection.stream().filter(x -> x.students.getId() == studentid).collect(Collectors.toList());
@@ -85,7 +101,7 @@ public abstract class Solution implements Comparable<Solution> {
 			
 			List<StudentClassProjection> classesinstudent= (studentclassprojection.stream().filter(x -> x.students.getId() == student.getId()).collect(Collectors.toList()));
 			for (StudentClassProjection classes : classesinstudent) {
-				schedule.add(dataLayer.getClassStringIdForInt(classes.classes.getType()));
+				schedule.add(dataLayer.getClassStringIdForInt(classes.classes.getType())+"|"+classes.classes.getStartSlot());
 				
 			}
 			writer.writeNext(Arrays.toString(schedule.toArray()).split("[\\[\\]]")[1].split(", "));
