@@ -1,5 +1,6 @@
 package scheduleOptimalizator;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,11 +20,13 @@ public class Schedule extends Solution  {
 	private int rating;
 	private int absentstudents;
 	private int clashes;
+	private int classesoverload;
 	static private int target_penalty_absent=5000;
 	static private int target_penalty_clashes=500000;
 	static private int target_add_busytime=2;
 	static private int interstudentchange=50;
 	static private int studentexchangenb=50;
+	static private int target_penalty_overload;
 	
 	
 
@@ -51,6 +54,7 @@ public class Schedule extends Solution  {
 		interstudentchange=interstudentchanges;
 		studentexchangenb=studentexchanges;
 		maxnbofmutation=maxmutation;
+		target_penalty_overload=targetov;
 		
 		Schedule schedule = new Schedule();
 		classesfilledfactor = ((double)minpercentofclassesp)/100;
@@ -323,10 +327,11 @@ public class Schedule extends Solution  {
 	@Override
 	public int[] getStats() {
 		// TODO Auto-generated method stub
-		int[] result = new int[3];
+		int[] result = new int[4];
 		result[0]=this.rating;
 		result[1]=this.clashes;
 		result[2]=this.absentstudents;
+		result[3]=this.classesoverload;
 		return result;
 	}
 
@@ -336,6 +341,7 @@ public class Schedule extends Solution  {
 		int allstudentsrating = 100000000;
 		int allclashes=0;
 		int allabsent=0;
+		int classoverload=0;
 		//for (StudentClassProjection projection : studentclassprojection) {
 		ArrayList<Student> studentsinprojection = new ArrayList<Student>();
 		studentsinprojection = this.getStudents();
@@ -356,6 +362,9 @@ public class Schedule extends Solution  {
 				allstudentsrating+=(int)Math.floor(-target_add_busytime*(double)student.busyTime-target_penalty_clashes*(double)student.clashes-target_penalty_absent*(double)student.absent);
 				allclashes+=student.clashes;
 				allabsent+=student.absent;
+			}
+			for (Class classes : this.getClasses()) {
+				classoverload+=target_penalty_overload*(classes.getMaxNumberofStudents() < this.countStudentsForClasses(classes.getType()) ? 0 : this.countStudentsForClasses(classes.getType())-classes.getMaxNumberofStudents());
 			}
 		//}
 		this.rating=allstudentsrating;
