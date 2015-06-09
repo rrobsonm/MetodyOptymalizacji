@@ -63,7 +63,7 @@ public class Population {
 	
 	private void log() {
 		// TODO Auto-generated method stub
-		for(int i = 0 ; i < size; ++i){
+		for(int i = 0 ; i < size; i=i+10){
 			logs.get(i).add(solutions.get(i).getStats());
 		}
 		
